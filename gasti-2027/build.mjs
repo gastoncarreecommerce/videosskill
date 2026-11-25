@@ -13,7 +13,8 @@ for (const id of ["pro","ene","feb","mar","abr","may","jun","jul","ago","sep","o
 // first word start (seconds into the VO file) whose text starts with `w`
 function wAt(id, w, nth = 0) {
   const ws = tx(id).words.filter((x) => x.type === "word");
-  const hits = ws.filter((x) => x.text.toLowerCase().replace(/[^\p{L}\d]/gu, "").startsWith(w.toLowerCase()));
+  const norm = (x) => x.text.toLowerCase().replace(/[^\p{L}\d]/gu, "");
+  const hits = ws.filter((x) => w === "gasti" ? /^(gast|gust|gas)/.test(norm(x)) : norm(x).startsWith(w.toLowerCase()));
   if (!hits[nth]) throw new Error(`word ${w} not in ${id}`);
   return hits[nth].start;
 }
@@ -58,17 +59,18 @@ function shake(t,amp,f){return {x:(vn(t*f)-0.5)*amp,y:(vn(t*f+50)-0.5)*amp}}
 // Times are local to the scene. VO_AT is where its voice starts.
 const scenes = [];
 const VO_AT = 0.45;
+const DAYS = {"ene": [0, 27], "feb": [27, 58], "mar": [58, 86], "abr": [86, 117], "may": [117, 147], "jun": [147, 178], "jul": [178, 208], "ago": [208, 239], "sep": [239, 270], "oct": [270, 300], "nov": [300, 331], "dic": [331, 361]};
 
 function monthDur(vo) { return +(VO_AT + VODUR[vo] + 0.8).toFixed(2); }
 
 // --- PROLOGUE
 {
-  const at = 0.8, id = "pro";
-  const tU = at + wAt(id, "último"), tG = at + wAt(id, "gusty"), tN = at + wAt(id, "nadie");
-  const dur = +(at + VODUR.pro + 1.4).toFixed(2);
+  const at = 0.6, id = "pro";
+  const tC = +(at + wAt(id, "cinco") - 0.15).toFixed(2), tU = at + wAt(id, "último"), tG = at + wAt(id, "gasti", 1), tN = at + wAt(id, "esa"), tP = +(at + wAt(id, "pero")).toFixed(2);
+  const dur = +(at + VODUR.pro + 1.2).toFixed(2);
   scenes.push({
-    id, dur, vo: [["pro", at]], cuts: [tU, tG, tN],
-    sfx: [["chest", tU + 0.5, 0.9], ["boom2", tG - 0.05, 0.55], ["static", tN - 0.1, 0.5], ["heart", 2.0, 0.7]],
+    id, dur, vo: [["pro", at]], cuts: [tC, tU, tG, tN, tP],
+    sfx: [["boom1", 0.0, 0.5], ["whoosh2", tC - 0.1, 0.4], ["chest", tU + 0.5, 0.9], ["boom2", tG - 0.05, 0.5], ["heart", tC + 1.0, 0.6], ["ice", tP + 0.1, 0.7], ["boom1", tP + 0.9, 0.5]],
     js: String.raw`
 function room(b,t,lit,grey){vgrad(b,"#05070d","#0b0d16");
  // window with rain
@@ -95,16 +97,27 @@ function chest(b,t,lid,inner,grey){vgrad(b,"#07060a","#100c0a");glow(b,540,900,8
  // lid
  b.save();b.translate(0,-40);b.scale(1,1-1.75*lid);if(lid>0.3){b.fillStyle="#120a04";b.fillRect(-250,-10,500,24)}b.fillStyle=lg(b,-260,-150,260,0,[[0,"#4a2d18"],[1,"#2a180c"]]);b.beginPath();b.moveTo(-260,0);b.lineTo(-260,-90);b.quadraticCurveTo(0,-230,260,-90);b.lineTo(260,0);b.closePath();b.fill();b.strokeStyle="#c8a040";b.lineWidth=10;b.stroke();b.restore();
  b.restore();dust(b,t,7,90,grey?"#ccc":"#ffd27a",1.2,2.4,0.7);if(grey)desat(b,0.85)}
-const SH=[[0,(b,t)=>room(b,t,1,false)],[${tU},(b,t)=>chest(b,t,eo((t-0.5)/0.6),ss(0.4,1.2,t),false)],[${tG},(b,t)=>chest(b,t+3,1,1,true)],[${tN},(b,t)=>room(b,t,0.6,true)]];
-function cam(t){const lt=t;if(t<${tU})return {z:1.0+t*0.012,...shake(t,6,1.5)};if(t<${tG}){const k=t-${tU};return {z:1.05+k*0.03,...shake(t,k>0.5&&k<1.1?26:5,9)}}if(t<${tN}){const k=t-${tG};return {z:1.25-k*0.04,...shake(t,4,2)}}return {z:1.12-(t-${tN})*0.02,x:0,y:0}}
+function coin(b,t){vgrad(b,"#0a0603","#000");for(let i=0;i<16;i++)beam(b,540,1000,i*0.3927+t*0.15,1300,90,"#ffcf6a",0.07);glow(b,540,1000,700,"#ffb020",0.45);
+ b.save();b.translate(540,1000);const sx=Math.cos(t*2.2);b.scale(Math.max(0.06,Math.abs(sx)),1);const face=sx>0;
+ b.fillStyle=lg(b,-260,-260,260,260,[[0,"#fff2b0"],[0.4,"#f3c03a"],[0.7,"#b8860b"],[1,"#6e4c06"]]);b.beginPath();b.arc(0,0,260,0,6.283);b.fill();b.strokeStyle="#7a5508";b.lineWidth=18;b.stroke();b.beginPath();b.arc(0,0,210,0,6.283);b.lineWidth=6;b.stroke();
+ b.fillStyle="#5a3c04";if(face){b.beginPath();b.arc(0,-30,95,0,6.283);b.fill();b.fillRect(-60,40,120,60);b.fillStyle="#f3c03a";b.beginPath();b.arc(-38,-35,28,0,6.283);b.arc(38,-35,28,0,6.283);b.fill();b.fillRect(-40,60,14,40);b.fillRect(-7,60,14,40);b.fillRect(26,60,14,40);b.save();b.strokeStyle="#5a3c04";b.lineWidth=26;b.lineCap="round";b.beginPath();b.moveTo(-150,110);b.lineTo(150,190);b.moveTo(150,110);b.lineTo(-150,190);b.stroke();b.restore()}else{txt(b,"TOKEN",0,-40,"400 120px 'League Gothic'","#5a3c04");txt(b,"PIRATA",0,70,"400 120px 'League Gothic'","#5a3c04")}
+ b.restore();dust(b,t,12,80,"#ffd27a",1,2.5,0.7)}
+function globe(b,t){fill(b,"#020306");for(let i=0;i<200;i++){b.fillStyle="#fff";b.globalAlpha=0.5*hash(i*7);b.fillRect(hash(i*3)*W,hash(i*5)*H,2,2)}b.globalAlpha=1;
+ const cx=540,cy=980,R0=360;glow(b,cx,cy,520,"#3a7bff",0.35);b.fillStyle=rg(b,cx-120,cy-140,40,R0,[[0,"#3f7fd0"],[1,"#0a1c3a"]]);b.beginPath();b.arc(cx,cy,R0,0,6.283);b.fill();
+ b.save();b.beginPath();b.arc(cx,cy,R0,0,6.283);b.clip();b.fillStyle="#2f6a3a";const sp=t*20;for(const [x,y,rx,ry] of [[-120,-120,130,90],[90,-60,110,150],[-60,140,90,70],[160,160,70,60]]){b.beginPath();b.ellipse(cx+((x+sp+500)%720)-360,cy+y,rx,ry,0.3,0,6.283);b.fill()}b.restore();
+ const p=ss(0.1,2.2,t);b.strokeStyle="#ff3b1f";b.lineWidth=7;b.shadowColor="#ff3b1f";b.shadowBlur=24;const r=R(9);for(let k=0;k<7;k++){let a=r()*6.283,x=cx+Math.cos(a)*30,y=cy+Math.sin(a)*30;b.beginPath();b.moveTo(x,y);const n=Math.floor(p*9);for(let j=0;j<n;j++){a+=(r()-.5)*0.9;x+=Math.cos(a)*45;y+=Math.sin(a)*45;if(Math.hypot(x-cx,y-cy)>R0)break;b.lineTo(x,y)}b.stroke()}b.shadowBlur=0;glow(b,cx,cy,200,"#ff5a1f",0.4*p)}
+const SH=[[0,coin],[${tC},(b,t)=>room(b,t,1,false)],[${tU},(b,t)=>chest(b,t,eo((t-0.5)/0.6),ss(0.4,1.2,t),false)],[${tG},(b,t)=>chest(b,t+3,1,1,true)],[${tN},(b,t)=>room(b,t,0.6,true)],[${tP},globe]];
+function cam(t){if(t<${tC})return {z:1.0+t*0.02};if(t>=${tP}){const k=t-${tP};return {z:1.0+k*0.04,...shake(t,k<0.8?18:3,8)}}if(t<${tU})return {z:1.0+(t-${tC})*0.012,...shake(t,6,1.5)};if(t<${tG}){const k=t-${tU};return {z:1.05+k*0.03,...shake(t,k>0.5&&k<1.1?26:5,9)}}if(t<${tN}){const k=t-${tG};return {z:1.25-k*0.04,...shake(t,4,2)}}return {z:1.12-(t-${tN})*0.02,x:0,y:0}}
 `,
     overlay: {
-      html: `<div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
+      html: `<div id="pro-q"><span>¿QUÉ PASARÍA SI</span><span>GASTI NO GANA</span><span class="red">EL TOKEN PIRATA?</span></div><div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
         <div id="pro-big"><span>GASTI NO CONSIGUIÓ</span><span class="red">EL TOKEN PIRATA</span></div>`,
       css: `#pro-date{position:absolute;left:120px;top:300px;font-size:34px;color:#ff4a4a;letter-spacing:.08em}
         #pro-big{position:absolute;left:120px;width:780px;top:340px;font-family:'League Gothic';font-size:150px;line-height:.9;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.9)}
-        #pro-big span{display:block}#pro-big .red{color:#ff3b30}`,
-      tl: `tl.fromTo("#pro-date",{opacity:0},{opacity:1,duration:.3},.3);
+        #pro-big span{display:block}#pro-big .red{color:#ff3b30}
+        #pro-q{position:absolute;left:120px;width:780px;top:330px;font-family:'League Gothic';font-size:136px;line-height:.92;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.95)}#pro-q span{display:block}#pro-q .red{color:#ffc53a}`,
+      tl: `tl.fromTo("#pro-q",{opacity:0,scale:1.15,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.4,ease:"power3.out"},.05);tl.fromTo("#pro-q",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(tC - 0.2).toFixed(2)});
+        tl.fromTo("#pro-date",{opacity:0},{opacity:1,duration:.3},${tC});
         tl.fromTo("#pro-date",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(tU - 0.2).toFixed(2)});
         tl.fromTo("#pro-big",{opacity:0,scale:1.4,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.25,ease:"power4.in"},${(tG - 0.05).toFixed(2)});
         tl.fromTo("#pro-big",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(tN - 0.15).toFixed(2)});`,
@@ -464,6 +477,7 @@ function sceneFile(s, idx) {
   const monthHtml = isMonth ? `
     <div id="${s.id}-live" class="ov-live"><b></b>EN VIVO · ${s.tag[0]}</div>
     <div id="${s.id}-title" class="ov-title"><span class="g1" data-layout-ignore>${s.month}</span><span class="g2" data-layout-ignore>${s.month}</span><span class="m">${s.month}</span></div>
+    <div id="${s.id}-days" class="ov-days"><i></i>DÍAS SIN TOKEN: <b id="${s.id}-dn">${DAYS[s.id][0]}</b></div>
     <div id="${s.id}-tag" class="ov-tag"><span class="k">2027</span><span class="v">${s.tag[1]}</span></div>` : "";
   const ts = s.month && s.month.length > 8 ? 190 : 230;
   const monthTl = isMonth ? `
@@ -472,6 +486,9 @@ function sceneFile(s, idx) {
     tl.fromTo("#${s.id}-title .g1",{x:-26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#${s.id}-title .g2",{x:26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#${s.id}-title",{opacity:1},{opacity:${s.id === "oct" ? 0 : 0.0},duration:.3,immediateRender:false},${s.id === "oct" ? (s.cuts[3] - 2.4).toFixed(2) : Math.min(3.2, s.cuts[0] + 0.6).toFixed(2)});
+    tl.fromTo("#${s.id}-days",{opacity:0,y:10},{opacity:1,y:0,duration:.3},.5);
+    {const D={v:${DAYS[s.id] ? DAYS[s.id][0] : 0}};tl.fromTo(D,{v:${DAYS[s.id] ? DAYS[s.id][0] : 0}},{v:${DAYS[s.id] ? DAYS[s.id][1] : 0},duration:1.2,ease:"power2.out",onUpdate(){document.querySelector("#${s.id}-dn").textContent=Math.round(D.v)}},.6);}
+    tl.fromTo("#${s.id}-days",{opacity:1},{opacity:0,duration:.25,immediateRender:false},${(s.id === "oct" ? s.cuts[2] - 0.3 : s.dur - 0.3).toFixed(2)});
     tl.fromTo("#${s.id}-tag",{opacity:0,x:-60},{opacity:1,x:0,duration:.35,ease:"power3.out"},${s.tagAt.toFixed(2)});
     tl.fromTo("#${s.id}-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(s.id === "oct" ? s.cuts[2] : s.dur - 0.3).toFixed(2)});
     tl.fromTo("#${s.id}-live b",{opacity:1},{opacity:.2,duration:.4,yoyo:true,repeat:${Math.max(1, Math.floor(s.dur / 0.8) * 2 - 1)},ease:"none"},.2);` : "";
@@ -484,6 +501,9 @@ function sceneFile(s, idx) {
     .ov-live b{display:block;width:16px;height:16px;border-radius:50%;background:#fff}
     .ov-title{position:absolute;left:116px;top:350px;font-family:'League Gothic';font-size:${ts}px;line-height:.9;color:#fff;text-shadow:0 10px 60px rgba(0,0,0,.8)}
     .ov-title span{display:block}.ov-title .g1,.ov-title .g2{position:absolute;left:0;top:0}.ov-title .g1{color:#ff2a55;mix-blend-mode:screen}.ov-title .g2{color:#00e5ff;mix-blend-mode:screen}
+    .ov-days{position:absolute;left:120px;top:590px;font-family:'IBM Plex Mono';font-weight:700;font-size:30px;color:#ffc53a;display:flex;align-items:center;gap:12px;text-shadow:0 2px 12px #000}
+    .ov-days b{color:#fff;font-size:34px}.ov-days i{display:block;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2b0,#d4a020 60%,#7a5508);box-shadow:0 0 14px rgba(255,197,58,.6);position:relative;overflow:hidden}
+    .ov-days i:after{content:"";position:absolute;left:15px;top:-2px;width:4px;height:40px;background:#1a0f00;transform:rotate(25deg)}
     .ov-tag{position:absolute;left:120px;top:990px;display:flex;font-family:'Archivo Black';font-size:34px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
     .ov-tag .k{background:#d91e18;color:#fff;padding:12px 18px}.ov-tag .v{background:#fff;color:#111;padding:12px 22px;white-space:nowrap}
     ${ov.css}
@@ -597,9 +617,8 @@ function placeAudio(src, start, dur, vol, kind, extra = "") {
 }
 for (const s of scenes) {
   for (const [vid, off] of s.vo) placeAudio(`assets/vo/${vid}.mp3`, s.start + off, VODUR[vid], 1, "vo");
-  for (const [name, t, vol] of s.sfx) placeAudio(`assets/sfx/${name}.mp3`, Math.max(0, s.start + t), sfxLen[name], vol, "sfx");
+  for (const [name, t, vol] of s.sfx.filter(([n]) => !/^(glitch|static)/.test(n))) placeAudio(`assets/sfx/${name}.mp3`, Math.max(0, s.start + t), sfxLen[name], vol, "sfx");
   // a static burst on every scene cut
-  if (s.start > 0) placeAudio(`assets/sfx/static.mp3`, s.start - 0.08, 0.5, 0.35, "sfx");
 }
 // music: bed1 until julio, bed2 after; silence during october blackout
 const jul = scenes.find((s) => s.id === "jul").start;
