@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#161616; overflow:hidden; font-family:"Inter",sans-serif; color:#aaaaaa; }
+    
+    #root { position:absolute; inset:0; background:#161616; overflow:hidden; font-family:"Inter",sans-serif; color:#aaaaaa; }
+    #dic-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #dic-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #dic-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#78706e; display:flex; align-items:center; gap:16px; }
+    #dic-dot { width:18px; height:18px; border-radius:50%; background:#78706e; }
+    #dic-month { position:absolute; left:124px; top:382px; font-family:"League Gothic",sans-serif; font-size:253px; line-height:0.9; letter-spacing:-0.005em; color:#aaaaaa; white-space:nowrap; }
+    #dic-year { display:none; }
+    #dic-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#aaaaaa; transform-origin:0 50%; }
+    #dic-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #dic-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #dic-head .ln { display:block; overflow:hidden; }
+    #dic-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #dic-head .ln.last span { color:#78706e; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #dic-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="dic" data-width="1080" data-height="1920">
+    <div id="dic-vig"></div><div id="dic-lines"></div>
+    
+      <div id="dic-all">
+        <div id="dic-kicker"><div id="dic-dot"></div>ÚLTIMO MOMENTO · VIDEOJUEGOS</div>
+        <div id="dic-month">DICIEMBRE</div>
+        <div id="dic-year">2027</div>
+        <div id="dic-rule"></div>
+        <div id="dic-vis">
+        <div id="dic-card" style="position:absolute;left:0;top:0;width:920px;height:380px;border:3px solid #5f5f5f;border-radius:24px">
+          <div class="mono" style="position:absolute;left:40px;top:40px;font-size:34px;color:#5f5f5f">NUEVA TEMPORADA · DISPONIBLE</div>
+          <div class="mono" style="position:absolute;left:40px;top:120px;font-size:34px;color:#5f5f5f">JUGADORES EN LÍNEA</div>
+          <div id="dic-n" style="position:absolute;left:40px;top:150px;font-family:'League Gothic',sans-serif;font-size:220px;line-height:1;color:#aaaaaa">0</div>
+          <div id="dic-cur" style="position:absolute;left:150px;top:180px;width:16px;height:170px;background:#aaaaaa"></div>
+        </div></div>
+        <div id="dic-head"><div class="ln"><span id="dic-l0">Nueva temporada</span></div><div class="ln"><span id="dic-l1">de Fortnite.</span></div><div class="ln"><span id="dic-l2">Nadie tiene ganas</span></div><div class="ln last"><span id="dic-l3">de jugar.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#dic-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#dic-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#dic-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#dic-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#dic-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#dic-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#dic-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#dic-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#dic-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#dic-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#dic-card", {opacity:0, y:20}, {opacity:1, y:0, duration:0.4}, 0.4);
+        tl.fromTo("#dic-cur", {opacity:1}, {opacity:0, duration:0.01, ease:"none", yoyo:true, repeat:9, repeatDelay:0.45}, 0.9);
+    window.__timelines["dic"] = tl;
+  </script>
+</template>

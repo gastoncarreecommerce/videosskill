@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#141517; overflow:hidden; font-family:"Inter",sans-serif; color:#bebebd; }
+    
+    #root { position:absolute; inset:0; background:#141517; overflow:hidden; font-family:"Inter",sans-serif; color:#bebebd; }
+    #sep-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #sep-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #sep-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#9d625d; display:flex; align-items:center; gap:16px; }
+    #sep-dot { width:18px; height:18px; border-radius:50%; background:#9d625d; }
+    #sep-month { position:absolute; left:124px; top:405px; font-family:"League Gothic",sans-serif; font-size:228px; line-height:0.9; letter-spacing:-0.005em; color:#bebebd; white-space:nowrap; }
+    #sep-year { display:none; }
+    #sep-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#bebebd; transform-origin:0 50%; }
+    #sep-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #sep-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #sep-head .ln { display:block; overflow:hidden; }
+    #sep-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #sep-head .ln.last span { color:#9d625d; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #sep-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="sep" data-width="1080" data-height="1920">
+    <div id="sep-vig"></div><div id="sep-lines"></div>
+    
+      <div id="sep-all">
+        <div id="sep-kicker"><div id="sep-dot"></div>ÚLTIMO MOMENTO · CLIMA</div>
+        <div id="sep-month">SEPTIEMBRE</div>
+        <div id="sep-year">2027</div>
+        <div id="sep-rule"></div>
+        <div id="sep-vis">
+        <div id="sep-box" style="position:absolute;left:0;top:0;width:920px;height:380px;overflow:hidden;border-bottom:4px solid #696b6e">
+          <div id="sep-city" style="position:absolute;left:0;right:0;top:120px;text-align:center;font-family:'League Gothic',sans-serif;font-size:220px;line-height:1;color:#bebebd">VENECIA</div>
+          <div id="sep-water" style="position:absolute;left:0;right:0;bottom:0;height:380px;background:linear-gradient(#7089a3cc, #7089a388);transform-origin:50% 100%"></div>
+        </div>
+        <div id="sep-lvl" class="mono" style="position:absolute;right:0;top:-8px;font-size:60px;font-weight:700;color:#9d625d">+0 cm</div></div>
+        <div id="sep-head"><div class="ln"><span id="sep-l0">Glaciares perdidos:</span></div><div class="ln"><span id="sep-l1">Perito Moreno, Himalaya.</span></div><div class="ln"><span id="sep-l2">El mar sube 40 cm.</span></div><div class="ln last"><span id="sep-l3">Venecia deja de existir.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#sep-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#sep-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#sep-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#sep-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#sep-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#sep-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#sep-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#sep-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#sep-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#sep-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#sep-box", {opacity:0}, {opacity:1, duration:0.3}, 0.4);
+        tl.fromTo("#sep-water", {scaleY:0.05}, {scaleY:0.95, duration:3.4, ease:"power1.in"}, 0.7);
+        tl.fromTo("#sep-city", {y:0}, {y:60, duration:3.4, ease:"power1.in"}, 0.7);
+        const st = {v:0};
+        tl.fromTo(st, {v:0}, {v:40, duration:3.4, ease:"power1.in", onUpdate(){ document.querySelector("#sep-lvl").textContent = "+" + Math.round(st.v) + " cm"; }}, 0.7);
+    window.__timelines["sep"] = tl;
+  </script>
+</template>

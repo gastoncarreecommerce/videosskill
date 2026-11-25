@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#121318; overflow:hidden; font-family:"Inter",sans-serif; color:#d2d2d0; }
+    
+    #root { position:absolute; inset:0; background:#121318; overflow:hidden; font-family:"Inter",sans-serif; color:#d2d2d0; }
+    #jun-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #jun-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #jun-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#c2534c; display:flex; align-items:center; gap:16px; }
+    #jun-dot { width:18px; height:18px; border-radius:50%; background:#c2534c; }
+    #jun-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#d2d2d0; white-space:nowrap; }
+    #jun-year { display:none; }
+    #jun-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#d2d2d0; transform-origin:0 50%; }
+    #jun-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #jun-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #jun-head .ln { display:block; overflow:hidden; }
+    #jun-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #jun-head .ln.last span { color:#c2534c; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #jun-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="jun" data-width="1080" data-height="1920">
+    <div id="jun-vig"></div><div id="jun-lines"></div>
+    
+      <div id="jun-all">
+        <div id="jun-kicker"><div id="jun-dot"></div>ÚLTIMO MOMENTO · SALUD ANIMAL</div>
+        <div id="jun-month">JUNIO</div>
+        <div id="jun-year">2027</div>
+        <div id="jun-rule"></div>
+        <div id="jun-vis">
+          <div id="jun-wall" style="position:absolute;left:640px;top:0;width:280px;height:380px;background:repeating-linear-gradient(0deg, #72767d55 0 3px, transparent 3px 46px), #d2d2d010;border-left:4px solid #72767d"></div>
+          <div id="jun-catw" style="position:absolute;left:250px;top:110px;width:240px;height:260px;color:#d2d2d0">
+        <svg class="jun-svg" width="240" height="260" viewBox="0 0 240 260">
+          <path d="M60 250 C30 250 30 160 70 140 C60 110 64 70 80 50 L86 10 L110 44 L140 44 L164 10 L170 50 C186 70 190 110 180 140 C220 160 220 250 190 250 Z" fill="currentColor"/>
+          <path d="M190 245 C240 240 250 190 228 170" stroke="currentColor" stroke-width="16" fill="none" stroke-linecap="round"/>
+        </svg></div>
+          <div id="jun-q" style="position:absolute;left:530px;top:40px;font-family:'League Gothic',sans-serif;font-size:140px;color:#c2534c">?</div>
+          <div id="jun-dx" class="mono" style="position:absolute;left:0;top:30px;font-size:34px;color:#72767d;line-height:1.6">DIAGNÓSTICO<br><b style="color:#c2534c;font-size:36px">DESCONOCIDO</b></div></div>
+        <div id="jun-head"><div class="ln"><span id="jun-l0">Un virus desconocido</span></div><div class="ln"><span id="jun-l1">ataca a los gatos.</span></div><div class="ln"><span id="jun-l2">Siguen mirando la pared.</span></div><div class="ln last"><span id="jun-l3">Ahora con motivo.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#jun-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#jun-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#jun-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#jun-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#jun-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#jun-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#jun-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#jun-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#jun-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#jun-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+          tl.fromTo("#jun-wall", {opacity:0}, {opacity:1, duration:0.4}, 0.4);
+          tl.fromTo("#jun-catw", {opacity:0, x:-40}, {opacity:1, x:0, duration:0.5, ease:"power2.out"}, 0.6);
+          tl.fromTo("#jun-catw", {scale:1}, {scale:1.04, duration:2.5, ease:"sine.inOut", transformOrigin:"50% 100%", immediateRender:false}, 1.1);
+          tl.fromTo("#jun-q", {opacity:0, y:20}, {opacity:1, y:0, duration:0.3, ease:"back.out(3)"}, 1.9);
+          tl.fromTo("#jun-dx", {opacity:0}, {opacity:1, duration:0.1}, 2.4);
+    window.__timelines["jun"] = tl;
+  </script>
+</template>

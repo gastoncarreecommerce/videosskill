@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#151515; overflow:hidden; font-family:"Inter",sans-serif; color:#9a9a9a; }
+    #epi-vig { position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255,255,255,0.03), rgba(0,0,0,0.8)); }
+    #epi-time { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; color:#777; letter-spacing:0.05em; }
+    #epi-t1 { position:absolute; left:120px; width:740px; top:420px; font-size:64px; font-weight:700; color:#bdbdbd; letter-spacing:-0.02em; }
+    #epi-end { position:absolute; left:0; right:0; top:820px; text-align:center; font-family:"League Gothic",sans-serif; font-size:260px; color:#2a2a2a; }
+    #epi-black { position:absolute; inset:0; background:#000; }
+  </style>
+  <div id="root" data-composition-id="epi" data-width="1080" data-height="1920">
+    <div id="epi-vig"></div>
+    <div id="epi-time">5 DIC 2027</div>
+    
+    <svg id="epi-chest" width="520" height="430" viewBox="0 0 520 430" style="position:absolute;left:280px;top:700px;overflow:visible">
+      <g id="epi-glowg"><ellipse id="epi-glow" cx="260" cy="170" rx="250" ry="120" fill="#8a8a8a" opacity="0"/></g>
+      <rect x="40" y="190" width="440" height="220" rx="16" fill="#2a2420" stroke="#9a9a9a" stroke-width="6"/>
+      <rect x="40" y="250" width="440" height="20" fill="#9a9a9a" opacity="0.5"/>
+      <rect x="236" y="220" width="48" height="70" rx="6" fill="#9a9a9a"/>
+      <g id="epi-lid"><path d="M40 190 L40 120 Q260 20 480 120 L480 190 Z" fill="#3a302a" stroke="#9a9a9a" stroke-width="6"/></g>
+      <g id="epi-item" opacity="0"><rect x="170" y="110" width="180" height="40" rx="6" fill="#8a8a8a"/><rect x="300" y="150" width="30" height="50" fill="#8a8a8a"/><rect x="190" y="98" width="40" height="14" fill="#8a8a8a"/></g>
+    </svg>
+    <svg id="epi-gasti" width="420" height="380" viewBox="0 0 420 380" style="position:absolute;left:330px;top:1000px">
+      <circle cx="210" cy="110" r="78" fill="#000"/>
+      <path d="M40 380 Q40 200 210 200 Q380 200 380 380 Z" fill="#000"/>
+    </svg>
+    <div id="epi-t1">Gasti sigue sin el token.</div>
+    <div id="epi-black"></div>
+    <div id="epi-end">2027</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#epi-black", {opacity:1}, {opacity:0, duration:0.8}, 0);
+    tl.fromTo("#epi-time", {opacity:0}, {opacity:1, duration:0.4}, 0.6);
+    tl.fromTo("#epi-chest", {opacity:0.6}, {opacity:1, duration:1}, 0.6);
+    tl.fromTo("#epi-t1", {opacity:0}, {opacity:1, duration:0.8}, 2.2);
+    tl.fromTo("#epi-black", {opacity:0}, {opacity:1, duration:0.15, immediateRender:false}, 5.0);
+    tl.fromTo("#epi-end", {opacity:0}, {opacity:1, duration:0.6}, 5.3);
+    window.__timelines["epi"] = tl;
+  </script>
+</template>

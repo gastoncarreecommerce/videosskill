@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#151616; overflow:hidden; font-family:"Inter",sans-serif; color:#b1b1b0; }
+    
+    #root { position:absolute; inset:0; background:#151616; overflow:hidden; font-family:"Inter",sans-serif; color:#b1b1b0; }
+    #nov-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #nov-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #nov-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#846b68; display:flex; align-items:center; gap:16px; }
+    #nov-dot { width:18px; height:18px; border-radius:50%; background:#846b68; }
+    #nov-month { position:absolute; left:124px; top:382px; font-family:"League Gothic",sans-serif; font-size:253px; line-height:0.9; letter-spacing:-0.005em; color:#b1b1b0; white-space:nowrap; }
+    #nov-year { display:none; }
+    #nov-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#b1b1b0; transform-origin:0 50%; }
+    #nov-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #nov-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #nov-head .ln { display:block; overflow:hidden; }
+    #nov-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #nov-head .ln.last span { color:#846b68; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #nov-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="nov" data-width="1080" data-height="1920">
+    <div id="nov-vig"></div><div id="nov-lines"></div>
+    
+      <div id="nov-all">
+        <div id="nov-kicker"><div id="nov-dot"></div>ÚLTIMO MOMENTO · ARGENTINA</div>
+        <div id="nov-month">NOVIEMBRE</div>
+        <div id="nov-year">2027</div>
+        <div id="nov-rule"></div>
+        <div id="nov-vis">
+        <svg id="nov-map" width="420" height="380" viewBox="0 0 420 380" style="position:absolute;left:0;top:0">
+          <path d="M150 0 L300 10 L330 60 L300 110 L280 170 L240 220 L230 280 L190 330 L170 380 L120 360 L130 300 L110 240 L120 170 L110 100 L130 40 Z" fill="#b1b1b0" stroke="#626364" stroke-width="3"/>
+        </svg>
+        <div id="nov-tag" data-layout-allow-overlap style="position:absolute;left:300px;top:40px;padding:6px 28px;background:#846b68;color:#151616;font-family:'League Gothic',sans-serif;font-size:96px;transform:rotate(-6deg)"><span id="nov-sale">SE VENDE</span></div>
+        <div id="nov-sold" data-layout-allow-overlap style="position:absolute;left:300px;top:40px;padding:6px 28px;background:#b1b1b0;color:#151616;font-family:'League Gothic',sans-serif;font-size:96px">VENDIDA</div>
+        <div id="nov-n1" style="position:absolute;left:460px;top:230px;font-family:'League Gothic',sans-serif;font-size:130px;line-height:1;color:#626364">PATAGONIA</div>
+        <div id="nov-n2" data-layout-allow-overlap style="position:absolute;left:460px;top:230px;font-family:'League Gothic',sans-serif;font-size:130px;line-height:1;color:#846b68">X-TAGONIA</div></div>
+        <div id="nov-head"><div class="ln"><span id="nov-l0">La Patagonia, en venta.</span></div><div class="ln"><span id="nov-l1">La compra Elon Musk.</span></div><div class="ln"><span id="nov-l2">Nuevo nombre:</span></div><div class="ln last"><span id="nov-l3">X-tagonia.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#nov-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#nov-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#nov-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#nov-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#nov-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#nov-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#nov-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#nov-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#nov-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#nov-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#nov-map", {opacity:0, y:30}, {opacity:1, y:0, duration:0.4}, 0.4);
+        tl.fromTo("#nov-tag", {opacity:0}, {opacity:1, duration:0.12}, 0.9);
+        tl.fromTo("#nov-n1", {opacity:0}, {opacity:1, duration:0.3}, 0.9);
+        tl.fromTo("#nov-sold", {opacity:0, scale:1.6, rotation:-6}, {opacity:1, scale:1, rotation:-6, duration:0.18, ease:"power4.in"}, 2.1);
+        tl.fromTo("#nov-n1", {opacity:1, x:0}, {opacity:0, x:-30, duration:0.25, immediateRender:false}, 2.8);
+        tl.fromTo("#nov-n2", {opacity:0, x:30}, {opacity:1, x:0, duration:0.25}, 2.95);
+    window.__timelines["nov"] = tl;
+  </script>
+</template>

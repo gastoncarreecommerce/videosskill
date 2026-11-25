@@ -1,0 +1,80 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#0e111a; overflow:hidden; font-family:"Inter",sans-serif; color:#f4f4f0; }
+    
+    #root { position:absolute; inset:0; background:#0e111a; overflow:hidden; font-family:"Inter",sans-serif; color:#f4f4f0; }
+    #ene-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #ene-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #ene-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#ff3b30; display:flex; align-items:center; gap:16px; }
+    #ene-dot { width:18px; height:18px; border-radius:50%; background:#ff3b30; }
+    #ene-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#f4f4f0; white-space:nowrap; }
+    #ene-year { display:none; }
+    #ene-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#f4f4f0; transform-origin:0 50%; }
+    #ene-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #ene-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #ene-head .ln { display:block; overflow:hidden; }
+    #ene-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #ene-head .ln.last span { color:#ff3b30; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+        .ene-chip { position:absolute; width:450px; height:170px; border:3px solid #828a96; border-radius:28px; display:flex; align-items:center; justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:40px; font-weight:700; color:#f4f4f0; }
+        .ene-stamp { position:absolute; padding:8px 22px; border:6px solid #ff3b30; color:#ff3b30; font-family:"League Gothic",sans-serif; font-size:76px; letter-spacing:0.04em; background:#0e111a; }
+    #ene-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="ene" data-width="1080" data-height="1920">
+    <div id="ene-vig"></div><div id="ene-lines"></div>
+    
+      <div id="ene-all">
+        <div id="ene-kicker"><div id="ene-dot"></div>ÚLTIMO MOMENTO · TECNOLOGÍA</div>
+        <div id="ene-month">ENERO</div>
+        <div id="ene-year">2027</div>
+        <div id="ene-rule"></div>
+        <div id="ene-vis">
+        <div class="ene-chip" data-layout-allow-overlap id="ene-c0" style="left:0px; top:0px">
+          <span>INSTAGRAM</span>
+          <div class="ene-stamp" id="ene-s0">COMPRADO</div>
+        </div>
+        <div class="ene-chip" data-layout-allow-overlap id="ene-c1" style="left:470px; top:0px">
+          <span>TIKTOK</span>
+          <div class="ene-stamp" id="ene-s1">COMPRADO</div>
+        </div>
+        <div class="ene-chip" data-layout-allow-overlap id="ene-c2" style="left:0px; top:200px">
+          <span>YOUTUBE</span>
+          <div class="ene-stamp" id="ene-s2">COMPRADO</div>
+        </div>
+        <div class="ene-chip" data-layout-allow-overlap id="ene-c3" style="left:470px; top:200px">
+          <span>WHATSAPP</span>
+          <div class="ene-stamp" id="ene-s3">COMPRADO</div>
+        </div></div>
+        <div id="ene-head"><div class="ln"><span id="ene-l0">Elon Musk compra</span></div><div class="ln"><span id="ene-l1">Instagram, TikTok,</span></div><div class="ln"><span id="ene-l2">YouTube y WhatsApp.</span></div><div class="ln last"><span id="ene-l3">Mandar un mensaje: pago.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#ene-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#ene-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#ene-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#ene-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#ene-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#ene-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#ene-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#ene-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#ene-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#ene-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#ene-c0", {opacity:0, y:30}, {opacity:1, y:0, duration:0.3, ease:"power3.out"}, 0.50);
+        tl.fromTo("#ene-s0", {opacity:0, scale:2.2, rotation:-14}, {opacity:1, scale:1, rotation:-8, duration:0.2, ease:"power4.in"}, 1.60);
+        tl.fromTo("#ene-c0 span", {opacity:1}, {opacity:0.25, duration:0.2}, 1.80);
+        tl.fromTo("#ene-c1", {opacity:0, y:30}, {opacity:1, y:0, duration:0.3, ease:"power3.out"}, 0.60);
+        tl.fromTo("#ene-s1", {opacity:0, scale:2.2, rotation:-14}, {opacity:1, scale:1, rotation:-8, duration:0.2, ease:"power4.in"}, 2.05);
+        tl.fromTo("#ene-c1 span", {opacity:1}, {opacity:0.25, duration:0.2}, 2.25);
+        tl.fromTo("#ene-c2", {opacity:0, y:30}, {opacity:1, y:0, duration:0.3, ease:"power3.out"}, 0.70);
+        tl.fromTo("#ene-s2", {opacity:0, scale:2.2, rotation:-14}, {opacity:1, scale:1, rotation:-8, duration:0.2, ease:"power4.in"}, 2.50);
+        tl.fromTo("#ene-c2 span", {opacity:1}, {opacity:0.25, duration:0.2}, 2.70);
+        tl.fromTo("#ene-c3", {opacity:0, y:30}, {opacity:1, y:0, duration:0.3, ease:"power3.out"}, 0.80);
+        tl.fromTo("#ene-s3", {opacity:0, scale:2.2, rotation:-14}, {opacity:1, scale:1, rotation:-8, duration:0.2, ease:"power4.in"}, 2.95);
+        tl.fromTo("#ene-c3 span", {opacity:1}, {opacity:0.25, duration:0.2}, 3.15);
+    window.__timelines["ene"] = tl;
+  </script>
+</template>

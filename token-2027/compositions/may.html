@@ -1,0 +1,64 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#111319; overflow:hidden; font-family:"Inter",sans-serif; color:#d9d9d7; }
+    
+    #root { position:absolute; inset:0; background:#111319; overflow:hidden; font-family:"Inter",sans-serif; color:#d9d9d7; }
+    #may-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #may-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #may-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#ce4e47; display:flex; align-items:center; gap:16px; }
+    #may-dot { width:18px; height:18px; border-radius:50%; background:#ce4e47; }
+    #may-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#d9d9d7; white-space:nowrap; }
+    #may-year { display:none; }
+    #may-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#d9d9d7; transform-origin:0 50%; }
+    #may-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #may-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #may-head .ln { display:block; overflow:hidden; }
+    #may-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #may-head .ln.last span { color:#ce4e47; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  .may-c { position:absolute; width:290px; height:76px; border:3px solid #757a82; border-radius:18px; display:flex; align-items:center; justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:28px; font-weight:700; color:#d9d9d7; }
+    #may-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="may" data-width="1080" data-height="1920">
+    <div id="may-vig"></div><div id="may-lines"></div>
+    
+      <div id="may-all">
+        <div id="may-kicker"><div id="may-dot"></div>ÚLTIMO MOMENTO · TECNOLOGÍA</div>
+        <div id="may-month">MAYO</div>
+        <div id="may-year">2027</div>
+        <div id="may-rule"></div>
+        <div id="may-vis"><div class="may-c" id="may-c0" style="left:0px;top:0px">X</div><div class="may-c" id="may-c1" style="left:310px;top:0px">FACEBOOK</div><div class="may-c" id="may-c2" style="left:620px;top:0px">REDDIT</div><div class="may-c" id="may-c3" style="left:0px;top:96px">TWITCH</div><div class="may-c" id="may-c4" style="left:310px;top:96px">SNAPCHAT</div><div class="may-c" id="may-c5" style="left:620px;top:96px">DISCORD</div><div class="may-c" id="may-c6" style="left:0px;top:192px">PINTEREST</div><div class="may-c" id="may-c7" style="left:310px;top:192px">LINKEDIN</div><div class="may-c" id="may-c8" style="left:620px;top:192px">TELEGRAM</div><div class="may-c" id="may-c9" style="left:0px;top:288px">THREADS</div><div class="may-c" id="may-c10" style="left:310px;top:288px">BLUESKY</div><div class="may-c" id="may-c11" style="left:620px;top:288px">SPOTIFY</div><div id="may-one" style="position:absolute;left:260px;top:110px;width:400px;height:160px;border-radius:36px;background:#ce4e47;display:flex;align-items:center;justify-content:center;font-family:'League Gothic',sans-serif;font-size:110px;color:#111319">LA APP</div></div>
+        <div id="may-head"><div class="ln"><span id="may-l0">Musk compra todas</span></div><div class="ln"><span id="may-l1">las redes que quedaban.</span></div><div class="ln"><span id="may-l2">Internet: una app,</span></div><div class="ln last"><span id="may-l3">un dueño.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#may-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#may-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#may-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#may-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#may-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#may-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#may-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#may-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#may-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#may-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo(".may-c", {opacity:0, scale:0.8}, {opacity:1, scale:1, duration:0.25, stagger:0.04}, 0.45);
+        tl.fromTo("#may-c0", {x:0, y:0}, {x:315, y:152, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.70);
+        tl.fromTo("#may-c1", {x:0, y:0}, {x:5, y:152, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.76);
+        tl.fromTo("#may-c2", {x:0, y:0}, {x:-305, y:152, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.82);
+        tl.fromTo("#may-c3", {x:0, y:0}, {x:315, y:56, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.88);
+        tl.fromTo("#may-c4", {x:0, y:0}, {x:5, y:56, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.70);
+        tl.fromTo("#may-c5", {x:0, y:0}, {x:-305, y:56, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.76);
+        tl.fromTo("#may-c6", {x:0, y:0}, {x:315, y:-40, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.82);
+        tl.fromTo("#may-c7", {x:0, y:0}, {x:5, y:-40, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.88);
+        tl.fromTo("#may-c8", {x:0, y:0}, {x:-305, y:-40, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.70);
+        tl.fromTo("#may-c9", {x:0, y:0}, {x:315, y:-136, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.76);
+        tl.fromTo("#may-c10", {x:0, y:0}, {x:5, y:-136, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.82);
+        tl.fromTo("#may-c11", {x:0, y:0}, {x:-305, y:-136, scale:0.3, opacity:0, duration:0.5, ease:"power3.in"}, 1.88);
+        tl.fromTo("#may-one", {opacity:0, scale:0.3}, {opacity:1, scale:1, duration:0.35, ease:"back.out(2.2)"}, 2.25);
+    window.__timelines["may"] = tl;
+  </script>
+</template>

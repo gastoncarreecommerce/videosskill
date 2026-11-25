@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#121418; overflow:hidden; font-family:"Inter",sans-serif; color:#ccccca; }
+    
+    #root { position:absolute; inset:0; background:#121418; overflow:hidden; font-family:"Inter",sans-serif; color:#ccccca; }
+    #jul-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #jul-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #jul-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#b55852; display:flex; align-items:center; gap:16px; }
+    #jul-dot { width:18px; height:18px; border-radius:50%; background:#b55852; }
+    #jul-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#ccccca; white-space:nowrap; }
+    #jul-year { display:none; }
+    #jul-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#ccccca; transform-origin:0 50%; }
+    #jul-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #jul-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #jul-head .ln { display:block; overflow:hidden; }
+    #jul-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #jul-head .ln.last span { color:#b55852; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #jul-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="jul" data-width="1080" data-height="1920">
+    <div id="jul-vig"></div><div id="jul-lines"></div>
+    
+      <div id="jul-all">
+        <div id="jul-kicker"><div id="jul-dot"></div>ÚLTIMO MOMENTO · ANTÁRTIDA</div>
+        <div id="jul-month">JULIO</div>
+        <div id="jul-year">2027</div>
+        <div id="jul-rule"></div>
+        <div id="jul-vis">
+        <svg id="jul-svg" width="920" height="380" viewBox="0 0 920 380" style="position:absolute;left:0;top:0">
+          <path id="jul-sea" d="M0 0H920V380H0Z" fill="#6a91ba12"/>
+          <path id="jul-ice" d="M80 120 L250 60 L420 90 L560 40 L700 110 L640 200 L700 290 L520 330 L330 300 L180 330 L110 250 Z" fill="#ccccca"/>
+          <path id="jul-chunk" d="M700 110 L800 140 L840 230 L760 300 L700 290 L640 200 Z" fill="#ccccca"/>
+          <path id="jul-crack" d="M700 110 L640 200 L700 290" stroke="#b55852" stroke-width="6" fill="none" stroke-dasharray="260" stroke-dashoffset="260"/>
+        </svg>
+        <div id="jul-tag" class="mono" style="position:absolute;left:420px;top:340px;white-space:nowrap;font-size:34px;font-weight:700;color:#b55852">≈ 176.000 km² · URUGUAY</div></div>
+        <div id="jul-head"><div class="ln"><span id="jul-l0">Se desprende un bloque</span></div><div class="ln"><span id="jul-l1">de hielo del tamaño</span></div><div class="ln"><span id="jul-l2">de Uruguay.</span></div><div class="ln last"><span id="jul-l3">Los científicos callan.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#jul-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#jul-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#jul-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#jul-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#jul-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#jul-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#jul-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#jul-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#jul-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#jul-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#jul-svg", {opacity:0}, {opacity:1, duration:0.4}, 0.4);
+        tl.fromTo("#jul-crack", {strokeDashoffset:260}, {strokeDashoffset:0, duration:0.6, ease:"power2.in"}, 1.2);
+        tl.fromTo("#jul-chunk", {x:0, y:0, rotation:0}, {x:70, y:30, rotation:8, svgOrigin:"760 200", duration:3.0, ease:"power1.inOut"}, 1.9);
+        tl.fromTo("#jul-crack", {opacity:1}, {opacity:0, duration:0.3, immediateRender:false}, 2.2);
+        tl.fromTo("#jul-tag", {opacity:0}, {opacity:1, duration:0.1}, 2.4);
+    window.__timelines["jul"] = tl;
+  </script>
+</template>

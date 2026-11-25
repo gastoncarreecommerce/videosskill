@@ -1,0 +1,71 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#131417; overflow:hidden; font-family:"Inter",sans-serif; color:#c5c5c3; }
+    
+    #root { position:absolute; inset:0; background:#131417; overflow:hidden; font-family:"Inter",sans-serif; color:#c5c5c3; }
+    #ago-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #ago-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #ago-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#a95d57; display:flex; align-items:center; gap:16px; }
+    #ago-dot { width:18px; height:18px; border-radius:50%; background:#a95d57; }
+    #ago-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#c5c5c3; white-space:nowrap; }
+    #ago-year { display:none; }
+    #ago-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#c5c5c3; transform-origin:0 50%; }
+    #ago-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #ago-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #ago-head .ln { display:block; overflow:hidden; }
+    #ago-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #ago-head .ln.last span { color:#a95d57; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  .ago-cat { position:absolute; top:80px; width:190px; height:206px; color:#6c6f73; }
+    #ago-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="ago" data-width="1080" data-height="1920">
+    <div id="ago-vig"></div><div id="ago-lines"></div>
+    
+      <div id="ago-all">
+        <div id="ago-kicker"><div id="ago-dot"></div>ÚLTIMO MOMENTO · OMS</div>
+        <div id="ago-month">AGOSTO</div>
+        <div id="ago-year">2027</div>
+        <div id="ago-rule"></div>
+        <div id="ago-vis"><div class="ago-cat" id="ago-k0" style="left:0px">
+        <svg class="" width="190" height="206" viewBox="0 0 240 260">
+          <path d="M60 250 C30 250 30 160 70 140 C60 110 64 70 80 50 L86 10 L110 44 L140 44 L164 10 L170 50 C186 70 190 110 180 140 C220 160 220 250 190 250 Z" fill="currentColor"/>
+          <path d="M190 245 C240 240 250 190 228 170" stroke="currentColor" stroke-width="16" fill="none" stroke-linecap="round"/>
+        </svg></div><div class="ago-cat" id="ago-k1" style="left:230px">
+        <svg class="" width="190" height="206" viewBox="0 0 240 260">
+          <path d="M60 250 C30 250 30 160 70 140 C60 110 64 70 80 50 L86 10 L110 44 L140 44 L164 10 L170 50 C186 70 190 110 180 140 C220 160 220 250 190 250 Z" fill="currentColor"/>
+          <path d="M190 245 C240 240 250 190 228 170" stroke="currentColor" stroke-width="16" fill="none" stroke-linecap="round"/>
+        </svg></div><div class="ago-cat" id="ago-k2" style="left:460px">
+        <svg class="" width="190" height="206" viewBox="0 0 240 260">
+          <path d="M60 250 C30 250 30 160 70 140 C60 110 64 70 80 50 L86 10 L110 44 L140 44 L164 10 L170 50 C186 70 190 110 180 140 C220 160 220 250 190 250 Z" fill="currentColor"/>
+          <path d="M190 245 C240 240 250 190 228 170" stroke="currentColor" stroke-width="16" fill="none" stroke-linecap="round"/>
+        </svg></div><div class="ago-cat" id="ago-k3" style="left:690px">
+        <svg class="" width="190" height="206" viewBox="0 0 240 260">
+          <path d="M60 250 C30 250 30 160 70 140 C60 110 64 70 80 50 L86 10 L110 44 L140 44 L164 10 L170 50 C186 70 190 110 180 140 C220 160 220 250 190 250 Z" fill="currentColor"/>
+          <path d="M190 245 C240 240 250 190 228 170" stroke="currentColor" stroke-width="16" fill="none" stroke-linecap="round"/>
+        </svg></div><div id="ago-st" style="position:absolute;left:70px;top:70px;padding:10px 34px;border:8px solid #a95d57;color:#a95d57;font-family:'League Gothic',sans-serif;font-size:150px;line-height:1;letter-spacing:0.03em;background:#131417cc">PANDEMIA</div>
+             <div id="ago-sub" class="mono" style="position:absolute;left:0;top:330px;font-size:34px;color:#6c6f73">ALERTA MÁXIMA · ESPECIE: <b style="color:#c5c5c3">FELIS CATUS</b></div></div>
+        <div id="ago-head"><div class="ln"><span id="ago-l0">El virus felino</span></div><div class="ln"><span id="ago-l1">es terminal.</span></div><div class="ln"><span id="ago-l2">La OMS declara pandemia.</span></div><div class="ln last"><span id="ago-l3">Para los gatos.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#ago-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#ago-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#ago-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#ago-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#ago-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#ago-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#ago-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#ago-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#ago-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#ago-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo(".ago-cat", {opacity:0, y:20}, {opacity:1, y:0, duration:0.3, stagger:0.08}, 0.4);
+        tl.fromTo(".ago-cat", {color:"#6c6f73"}, {color:"#a95d57", duration:0.2, stagger:0.1, immediateRender:false}, 1.2);
+        tl.fromTo("#ago-st", {opacity:0, scale:2.4, rotation:-10}, {opacity:1, scale:1, rotation:-6, duration:0.2, ease:"power4.in"}, 1.8);
+        tl.fromTo("#ago-sub", {opacity:0}, {opacity:1, duration:0.1}, 2.3);
+    window.__timelines["ago"] = tl;
+  </script>
+</template>

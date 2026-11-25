@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; pointer-events:none; }
+    #hud-bar { position:absolute; left:80px; right:80px; top:180px; display:flex; gap:8px; }
+    .hud-s { position:relative; flex:1; height:6px; background:rgba(255,255,255,0.15); }
+    .hud-f { position:absolute; inset:0; background:rgba(255,255,255,0.75); transform-origin:0 50%; }
+    .hud-s span { position:absolute; left:0; top:12px; font-family:"IBM Plex Mono",monospace; font-size:16px; color:rgba(255,255,255,0.6); }
+  </style>
+  <div id="root" data-composition-id="hud" data-width="1080" data-height="1920">
+    <div id="hud-bar" data-layout-ignore><div class="hud-s"><div class="hud-f" id="hud-f0"></div><span>E</span></div><div class="hud-s"><div class="hud-f" id="hud-f1"></div><span>F</span></div><div class="hud-s"><div class="hud-f" id="hud-f2"></div><span>M</span></div><div class="hud-s"><div class="hud-f" id="hud-f3"></div><span>A</span></div><div class="hud-s"><div class="hud-f" id="hud-f4"></div><span>M</span></div><div class="hud-s"><div class="hud-f" id="hud-f5"></div><span>J</span></div><div class="hud-s"><div class="hud-f" id="hud-f6"></div><span>J</span></div><div class="hud-s"><div class="hud-f" id="hud-f7"></div><span>A</span></div><div class="hud-s"><div class="hud-f" id="hud-f8"></div><span>S</span></div><div class="hud-s"><div class="hud-f" id="hud-f9"></div><span>O</span></div><div class="hud-s"><div class="hud-f" id="hud-f10"></div><span>N</span></div><div class="hud-s"><div class="hud-f" id="hud-f11"></div><span>D</span></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#hud-f0", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 0.00);
+    tl.fromTo("#hud-f1", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 5.50);
+    tl.fromTo("#hud-f2", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 11.00);
+    tl.fromTo("#hud-f3", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 16.50);
+    tl.fromTo("#hud-f4", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 22.00);
+    tl.fromTo("#hud-f5", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 27.50);
+    tl.fromTo("#hud-f6", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 33.00);
+    tl.fromTo("#hud-f7", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 38.50);
+    tl.fromTo("#hud-f8", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 44.00);
+    tl.fromTo("#hud-f9", {scaleX:0}, {scaleX:1, duration:7.45, ease:"none"}, 49.50);
+    tl.fromTo("#hud-f10", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 57.00);
+    tl.fromTo("#hud-f11", {scaleX:0}, {scaleX:1, duration:5.45, ease:"none"}, 62.50);
+    tl.fromTo("#hud-bar", {opacity:1}, {opacity:1, duration:0.01}, 67.98);
+    window.__timelines["hud"] = tl;
+  </script>
+</template>

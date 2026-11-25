@@ -1,0 +1,68 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#101219; overflow:hidden; font-family:"Inter",sans-serif; color:#e0e0dd; }
+    
+    #root { position:absolute; inset:0; background:#101219; overflow:hidden; font-family:"Inter",sans-serif; color:#e0e0dd; }
+    #abr-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #abr-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #abr-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#da4941; display:flex; align-items:center; gap:16px; }
+    #abr-dot { width:18px; height:18px; border-radius:50%; background:#da4941; }
+    #abr-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#e0e0dd; white-space:nowrap; }
+    #abr-year { display:none; }
+    #abr-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#e0e0dd; transform-origin:0 50%; }
+    #abr-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #abr-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #abr-head .ln { display:block; overflow:hidden; }
+    #abr-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #abr-head .ln.last span { color:#da4941; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+        .abr-p { position:absolute; width:70px; height:130px; }
+        .abr-h { position:absolute; left:17px; top:0; width:36px; height:36px; border-radius:50%; background:#e0e0dd; }
+        .abr-b { position:absolute; left:5px; top:44px; width:60px; height:80px; border-radius:30px 30px 8px 8px; background:#e0e0dd; }
+        .abr-bot { position:absolute; left:0; top:0; width:70px; height:124px; border-radius:6px; background:#101219; border:4px solid #da4941; opacity:0; }
+    #abr-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="abr" data-width="1080" data-height="1920">
+    <div id="abr-vig"></div><div id="abr-lines"></div>
+    
+      <div id="abr-all">
+        <div id="abr-kicker"><div id="abr-dot"></div>ÚLTIMO MOMENTO · TRABAJO</div>
+        <div id="abr-month">ABRIL</div>
+        <div id="abr-year">2027</div>
+        <div id="abr-rule"></div>
+        <div id="abr-vis"><div class="abr-p" style="left:0px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r0"></div></div><div class="abr-p" style="left:92px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r1"></div></div><div class="abr-p" style="left:184px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r2"></div></div><div class="abr-p" style="left:276px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r3"></div></div><div class="abr-p" style="left:368px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r4"></div></div><div class="abr-p" style="left:460px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r5"></div></div><div class="abr-p" style="left:552px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r6"></div></div><div class="abr-p" style="left:644px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r7"></div></div><div class="abr-p" style="left:736px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r8"></div></div><div class="abr-p" style="left:828px;top:0px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r9"></div></div><div class="abr-p" style="left:0px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r10"></div></div><div class="abr-p" style="left:92px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r11"></div></div><div class="abr-p" style="left:184px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r12"></div></div><div class="abr-p" style="left:276px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r13"></div></div><div class="abr-p" style="left:368px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r14"></div></div><div class="abr-p" style="left:460px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r15"></div></div><div class="abr-p" style="left:552px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r16"></div></div><div class="abr-p" style="left:644px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r17"></div></div><div class="abr-p" style="left:736px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r18"></div></div><div class="abr-p" style="left:828px;top:150px"><div class="abr-h"></div><div class="abr-b"></div><div class="abr-bot" id="abr-r19"></div></div><div class="mono" style="position:absolute;left:0;top:320px;font-size:34px;color:#787e87">EMPLEOS HUMANOS</div>
+             <div id="abr-pct" class="mono" style="position:absolute;right:0;top:300px;font-size:64px;font-weight:700;color:#da4941">-0%</div></div>
+        <div id="abr-head"><div class="ln"><span id="abr-l0">La IA reemplaza a la</span></div><div class="ln"><span id="abr-l1">mitad de los trabajos.</span></div><div class="ln"><span id="abr-l2">El anuncio lo escribió</span></div><div class="ln last"><span id="abr-l3">una IA.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#abr-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#abr-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#abr-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#abr-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#abr-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#abr-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#abr-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#abr-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#abr-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#abr-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo(".abr-p", {opacity:0, y:20}, {opacity:1, y:0, duration:0.25, stagger:0.02}, 0.45);
+        tl.fromTo("#abr-r3", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 1.50);
+        tl.fromTo("#abr-r17", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 1.70);
+        tl.fromTo("#abr-r8", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 1.90);
+        tl.fromTo("#abr-r12", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 2.10);
+        tl.fromTo("#abr-r0", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 2.30);
+        tl.fromTo("#abr-r15", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 2.50);
+        tl.fromTo("#abr-r6", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 2.70);
+        tl.fromTo("#abr-r19", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 2.90);
+        tl.fromTo("#abr-r10", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 3.10);
+        tl.fromTo("#abr-r5", {opacity:0, scale:0.6}, {opacity:1, scale:1, duration:0.14, ease:"power4.out"}, 3.30);
+        const at = {v:0};
+        tl.fromTo(at, {v:0}, {v:50, duration:2.0, ease:"none", onUpdate(){ document.querySelector("#abr-pct").textContent = "-" + Math.round(at.v) + "%"; }}, 1.5);
+    window.__timelines["abr"] = tl;
+  </script>
+</template>

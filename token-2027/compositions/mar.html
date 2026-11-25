@@ -1,0 +1,61 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#0f1219; overflow:hidden; font-family:"Inter",sans-serif; color:#e7e7e3; }
+    
+    #root { position:absolute; inset:0; background:#0f1219; overflow:hidden; font-family:"Inter",sans-serif; color:#e7e7e3; }
+    #mar-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #mar-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #mar-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#e6453b; display:flex; align-items:center; gap:16px; }
+    #mar-dot { width:18px; height:18px; border-radius:50%; background:#e6453b; }
+    #mar-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#e7e7e3; white-space:nowrap; }
+    #mar-year { display:none; }
+    #mar-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#e7e7e3; transform-origin:0 50%; }
+    #mar-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #mar-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #mar-head .ln { display:block; overflow:hidden; }
+    #mar-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #mar-head .ln.last span { color:#e6453b; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #mar-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="mar" data-width="1080" data-height="1920">
+    <div id="mar-vig"></div><div id="mar-lines"></div>
+    
+      <div id="mar-all">
+        <div id="mar-kicker"><div id="mar-dot"></div>ÚLTIMO MOMENTO · CLIMA</div>
+        <div id="mar-month">MARZO</div>
+        <div id="mar-year">2027</div>
+        <div id="mar-rule"></div>
+        <div id="mar-vis">
+        <div id="mar-tube" style="position:absolute;left:30px;top:0;width:90px;height:380px;border:4px solid #7c828c;border-radius:45px;overflow:hidden">
+          <div id="mar-fill" style="position:absolute;left:0;right:0;bottom:0;height:100%;background:#e6453b;transform-origin:50% 100%"></div>
+        </div>
+        <div id="mar-num" style="position:absolute;left:180px;top:20px;font-family:'League Gothic',sans-serif;font-size:260px;line-height:1;color:#e6453b">24°C</div>
+        <div id="mar-off" class="mono" style="position:absolute;left:190px;top:290px;font-size:34px;line-height:1.35;white-space:nowrap;color:#7c828c">LUZ: <b style="color:#e7e7e3">SIN SERVICIO</b><br>AGUA: <b style="color:#e7e7e3">SIN SERVICIO</b></div></div>
+        <div id="mar-head"><div class="ln"><span id="mar-l0">52 °C en Buenos Aires.</span></div><div class="ln"><span id="mar-l1">Se cortan la luz</span></div><div class="ln last"><span id="mar-l2">y el agua el mismo día.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#mar-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#mar-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#mar-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#mar-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#mar-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#mar-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#mar-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#mar-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#mar-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#mar-tube", {opacity:0}, {opacity:1, duration:0.3}, 0.5);
+        tl.fromTo("#mar-fill", {scaleY:0.2}, {scaleY:0.95, duration:2.4, ease:"power2.in"}, 0.6);
+        const mt = {v:24};
+        tl.fromTo(mt, {v:24}, {v:52, duration:2.4, ease:"power2.in", onUpdate(){ document.querySelector("#mar-num").textContent = Math.round(mt.v) + "°C"; }}, 0.6);
+        tl.fromTo("#mar-num", {opacity:0}, {opacity:1, duration:0.2}, 0.6);
+        tl.fromTo("#mar-num", {x:0}, {x:6, duration:0.05, yoyo:true, repeat:9, ease:"none", immediateRender:false}, 3.0);
+        tl.fromTo("#mar-off", {opacity:0}, {opacity:1, duration:0.1, ease:"none"}, 3.2);
+    window.__timelines["mar"] = tl;
+  </script>
+</template>

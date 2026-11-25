@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#0f111a; overflow:hidden; font-family:"Inter",sans-serif; color:#ededea; }
+    
+    #root { position:absolute; inset:0; background:#0f111a; overflow:hidden; font-family:"Inter",sans-serif; color:#ededea; }
+    #feb-vig { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 42%, rgba(255,255,255,0.05), rgba(0,0,0,0.55) 100%); }
+    #feb-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px); }
+    #feb-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:700; letter-spacing:0.06em; color:#f34036; display:flex; align-items:center; gap:16px; }
+    #feb-dot { width:18px; height:18px; border-radius:50%; background:#f34036; }
+    #feb-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; letter-spacing:-0.005em; color:#ededea; white-space:nowrap; }
+    #feb-year { display:none; }
+    #feb-rule { position:absolute; left:120px; width:768px; top:626px; height:4px; background:#ededea; transform-origin:0 50%; }
+    #feb-vis { position:absolute; left:120px; top:660px; width:920px; height:400px; transform:scale(0.835); transform-origin:0 0; }
+    #feb-head { position:absolute; left:120px; width:660px; top:1000px; }
+    #feb-head .ln { display:block; overflow:hidden; }
+    #feb-head .ln span { display:block; font-size:46px; font-weight:700; line-height:1.12; letter-spacing:-0.02em; }
+    #feb-head .ln.last span { color:#f34036; }
+    .mono { font-family:"IBM Plex Mono",monospace; }
+  
+    #feb-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="feb" data-width="1080" data-height="1920">
+    <div id="feb-vig"></div><div id="feb-lines"></div>
+    
+      <div id="feb-all">
+        <div id="feb-kicker"><div id="feb-dot"></div>ÚLTIMO MOMENTO · MÚSICA</div>
+        <div id="feb-month">FEBRERO</div>
+        <div id="feb-year">2027</div>
+        <div id="feb-rule"></div>
+        <div id="feb-vis">
+        <svg id="feb-disc" width="380" height="380" viewBox="-190 -190 380 380" style="position:absolute;left:20px;top:10px">
+          <circle r="186" fill="#0b0b0d" stroke="#7f8691" stroke-width="3"/>
+          <circle r="160" fill="none" stroke="#2a2a30" stroke-width="2"/><circle r="140" fill="none" stroke="#2a2a30" stroke-width="2"/><circle r="120" fill="none" stroke="#2a2a30" stroke-width="2"/><circle r="100" fill="none" stroke="#2a2a30" stroke-width="2"/>
+          <circle r="62" fill="#f34036"/><circle r="8" fill="#0b0b0d"/>
+          <rect x="-4" y="-150" width="8" height="40" fill="#ffffff22"/>
+        </svg>
+        <div id="feb-cat" class="mono" style="position:absolute;left:450px;top:40px;font-size:34px;color:#7f8691;line-height:1.5">CATEGORÍA<br><span style="color:#ededea;font-size:44px;font-weight:700">ÁLBUM DEL AÑO</span></div>
+        <div id="feb-nom" class="mono" style="position:absolute;left:450px;top:200px;font-size:34px;color:#7f8691;line-height:1.5">NOMINADOS<br><span id="feb-n" style="color:#f34036;font-size:96px;font-weight:700">1</span></div></div>
+        <div id="feb-head"><div class="ln"><span id="feb-l0">Taylor Swift saca</span></div><div class="ln"><span id="feb-l1">un álbum sorpresa</span></div><div class="ln"><span id="feb-l2">y gana Álbum del Año.</span></div><div class="ln last"><span id="feb-l3">No compitió nadie más.</span></div></div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+    tl.fromTo("#feb-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+    tl.fromTo("#feb-kicker", {opacity:0, x:-30}, {opacity:1, x:0, duration:0.3, ease:"power3.out"}, 0.15);
+    tl.fromTo("#feb-dot", {opacity:1}, {opacity:0.15, duration:0.4, ease:"none", yoyo:true, repeat:11}, 0.4);
+    tl.fromTo("#feb-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+    tl.fromTo("#feb-rule", {scaleX:0}, {scaleX:1, duration:0.5, ease:"power3.inOut"}, 0.2);
+    tl.fromTo("#feb-l0", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.00);
+    tl.fromTo("#feb-l1", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.42);
+    tl.fromTo("#feb-l2", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 1.84);
+    tl.fromTo("#feb-l3", {yPercent:110}, {yPercent:0, duration:0.42, ease:"power3.out"}, 2.26);
+    tl.fromTo("#feb-all", {opacity:1, y:0}, {opacity:0, y:-40, duration:0.22, ease:"power2.in"}, 5.24);
+  
+        tl.fromTo("#feb-disc", {opacity:0, x:-60, rotation:0}, {opacity:1, x:0, duration:0.4, ease:"power3.out"}, 0.5);
+        tl.fromTo("#feb-disc", {rotation:0}, {rotation:540, duration:4.6, ease:"none", immediateRender:false}, 0.5);
+        tl.fromTo("#feb-cat", {opacity:0, y:20}, {opacity:1, y:0, duration:0.3}, 0.8);
+        tl.fromTo("#feb-nom", {opacity:0, y:20}, {opacity:1, y:0, duration:0.3}, 1.4);
+        tl.fromTo("#feb-n", {scale:1.6, opacity:0}, {scale:1, opacity:1, duration:0.25, ease:"back.out(3)"}, 1.6);
+    window.__timelines["feb"] = tl;
+  </script>
+</template>

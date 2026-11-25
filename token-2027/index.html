@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+      #root { position:relative; width:100%; height:100%; background:#000; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="83.5" data-width="1080" data-height="1920">
+      <div id="pro" class="clip" data-composition-id="pro" data-composition-src="compositions/pro.html" data-start="0" data-duration="7" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="ene" class="clip" data-composition-id="ene" data-composition-src="compositions/ene.html" data-start="7" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="feb" class="clip" data-composition-id="feb" data-composition-src="compositions/feb.html" data-start="12.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="mar" class="clip" data-composition-id="mar" data-composition-src="compositions/mar.html" data-start="18" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="abr" class="clip" data-composition-id="abr" data-composition-src="compositions/abr.html" data-start="23.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="may" class="clip" data-composition-id="may" data-composition-src="compositions/may.html" data-start="29" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="jun" class="clip" data-composition-id="jun" data-composition-src="compositions/jun.html" data-start="34.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="jul" class="clip" data-composition-id="jul" data-composition-src="compositions/jul.html" data-start="40" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="ago" class="clip" data-composition-id="ago" data-composition-src="compositions/ago.html" data-start="45.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="sep" class="clip" data-composition-id="sep" data-composition-src="compositions/sep.html" data-start="51" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="oct" class="clip" data-composition-id="oct" data-composition-src="compositions/oct.html" data-start="56.5" data-duration="7.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="nov" class="clip" data-composition-id="nov" data-composition-src="compositions/nov.html" data-start="64" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="dic" class="clip" data-composition-id="dic" data-composition-src="compositions/dic.html" data-start="69.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="epi" class="clip" data-composition-id="epi" data-composition-src="compositions/epi.html" data-start="75" data-duration="8.5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="hud" class="clip" data-composition-id="hud" data-composition-src="compositions/hud.html" data-start="7" data-duration="68" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:5"></div>
+      <audio id="a1" class="clip" src="assets/sfx/sfx_004.mp3" data-start="0.000" data-track-index="21" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a2" class="clip" src="assets/sfx/sfx_004.mp3" data-start="11.000" data-track-index="22" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a3" class="clip" src="assets/sfx/sfx_004.mp3" data-start="22.000" data-track-index="21" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a4" class="clip" src="assets/sfx/sfx_004.mp3" data-start="33.000" data-track-index="22" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a5" class="clip" src="assets/sfx/sfx_004.mp3" data-start="44.000" data-track-index="21" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a6" class="clip" src="assets/sfx/sfx_004.mp3" data-start="55.000" data-track-index="22" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a7" class="clip" src="assets/sfx/sfx_004.mp3" data-start="66.000" data-track-index="21" data-volume="0.32" data-duration="13.00" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a8" class="clip" src="assets/sfx/sfx_004.mp3" data-start="77.000" data-track-index="22" data-volume="0.32" data-duration="6.50" data-fade-in="1.5" data-fade-out="1.5"></audio>
+      <audio id="a9" class="clip" src="assets/sfx/sfx_005.mp3" data-start="2.860" data-track-index="20" data-volume="0.6" data-duration="2.1"></audio>
+      <audio id="a10" class="clip" src="assets/sfx/sfx_006.mp3" data-start="6.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a11" class="clip" src="assets/sfx/sfx_002.mp3" data-start="10.701" data-track-index="23" data-volume="0.28" data-duration="2"></audio>
+      <audio id="a12" class="clip" src="assets/sfx/sfx_006.mp3" data-start="17.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a13" class="clip" src="assets/sfx/sfx_002.mp3" data-start="21.701" data-track-index="23" data-volume="0.28" data-duration="2"></audio>
+      <audio id="a14" class="clip" src="assets/sfx/sfx_006.mp3" data-start="28.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a15" class="clip" src="assets/sfx/sfx_002.mp3" data-start="32.701" data-track-index="23" data-volume="0.28" data-duration="2"></audio>
+      <audio id="a16" class="clip" src="assets/sfx/sfx_006.mp3" data-start="39.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a17" class="clip" src="assets/sfx/sfx_002.mp3" data-start="43.701" data-track-index="23" data-volume="0.28" data-duration="2"></audio>
+      <audio id="a18" class="clip" src="assets/sfx/sfx_006.mp3" data-start="50.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a19" class="clip" src="assets/sfx/sfx_006.mp3" data-start="63.951" data-track-index="20" data-volume="0.7" data-duration="0.57"></audio>
+      <audio id="a20" class="clip" src="assets/sfx/sfx_002.mp3" data-start="67.701" data-track-index="23" data-volume="0.28" data-duration="2"></audio>
+      <audio id="a21" class="clip" src="assets/sfx/sfx_005.mp3" data-start="8.760" data-track-index="24" data-volume="0.35" data-duration="2.1"></audio>
+      <audio id="a22" class="clip" src="assets/sfx/sfx_005.mp3" data-start="47.460" data-track-index="24" data-volume="0.45" data-duration="2.1"></audio>
+      <audio id="a23" class="clip" src="assets/sfx/sfx_005.mp3" data-start="66.240" data-track-index="24" data-volume="0.35" data-duration="2.1"></audio>
+      <audio id="a24" class="clip" src="assets/sfx/sfx_001.mp3" data-start="59.413" data-track-index="25" data-volume="1" data-duration="4.2"></audio>
+      <audio id="a25" class="clip" src="assets/sfx/sfx_005.mp3" data-start="60.330" data-track-index="24" data-volume="0.7" data-duration="2.1"></audio>
+      <audio id="a26" class="clip" src="assets/sfx/sfx_008.mp3" data-start="75.200" data-track-index="25" data-volume="0.9" data-duration="4.4"></audio>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

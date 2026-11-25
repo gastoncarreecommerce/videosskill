@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; background:#151517; overflow:hidden; font-family:"Inter",sans-serif; color:#b7b7b7; }
+    
+      #root { background:#050505; }
+      #oct-kicker { position:absolute; left:120px; top:296px; font-family:"IBM Plex Mono",monospace; font-size:28px; font-weight:700; letter-spacing:0.06em; color:#916663; display:flex; gap:16px; align-items:center; }
+      #oct-dot { width:18px; height:18px; border-radius:50%; background:#916663; }
+      #oct-month { position:absolute; left:124px; top:340px; font-family:"League Gothic",sans-serif; font-size:300px; line-height:0.9; color:#b7b7b7; }
+      #oct-year { display:none; }
+      #oct-count { position:absolute; left:120px; top:660px; font-size:40px; color:#656769; }
+      #oct-paper { position:absolute; left:120px; top:560px; width:768px; height:700px; background:#e9e6df; color:#111; padding:40px 44px; box-shadow:0 40px 120px rgba(0,0,0,0.8); }
+      #oct-mast { font-family:"IBM Plex Mono",monospace; font-size:28px; font-weight:700; border-bottom:4px solid #111; padding-bottom:16px; letter-spacing:0.08em; }
+      #oct-h1 { font-family:"League Gothic",sans-serif; font-size:224px; line-height:0.88; margin-top:30px; }
+      #oct-h2 { font-family:"League Gothic",sans-serif; font-size:130px; line-height:1; margin-top:18px; color:#b3261e; }
+    #oct-all, #oct-all { position:absolute; inset:0; }
+  </style>
+  <div id="root" data-composition-id="oct" data-width="1080" data-height="1920">
+    
+    
+      <div id="oct-all">
+        <div id="oct-kicker"><div id="oct-dot"></div>ELECCIONES PRESIDENCIALES · ARGENTINA</div>
+        <div id="oct-month">OCTUBRE</div>
+        <div id="oct-year">2027</div>
+        <div id="oct-count" class="mono">ESCRUTADO <span id="oct-pct">0,00</span>%</div>
+        <div id="oct-paper">
+          <div id="oct-mast">EDICIÓN EXTRA · 2027</div>
+          <div id="oct-h1">MILEI<br>REELECTO</div>
+          <div id="oct-h2">4 AÑOS MÁS</div>
+        </div>
+      </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+      tl.fromTo("#oct-month", {opacity:0, scale:1.35, transformOrigin:"0% 50%"}, {opacity:1, scale:1, duration:0.32, ease:"power4.out"}, 0.05);
+      tl.fromTo("#oct-kicker", {opacity:0}, {opacity:1, duration:0.3}, 0.15);
+      tl.fromTo("#oct-year", {opacity:0}, {opacity:1, duration:0.3}, 0.3);
+      tl.fromTo("#oct-dot", {opacity:1}, {opacity:0.15, duration:0.4, yoyo:true, repeat:5, ease:"none"}, 0.4);
+      tl.fromTo("#oct-count", {opacity:0}, {opacity:1, duration:0.2}, 0.6);
+      const oc = {v:0};
+      tl.fromTo(oc, {v:0}, {v:100, duration:2.4, ease:"power2.inOut", onUpdate(){ document.querySelector("#oct-pct").textContent = oc.v.toFixed(2).replace(".", ","); }}, 0.7);
+      tl.fromTo("#oct-month, #oct-kicker, #oct-year, #oct-count", {opacity:1}, {opacity:0, duration:0.15}, 3.3);
+      tl.fromTo("#oct-paper", {opacity:0, scale:2.6, rotation:-22, y:-300}, {opacity:1, scale:1, rotation:-2, y:-250, duration:0.42, ease:"power4.in"}, 3.45);
+      tl.fromTo("#oct-all", {x:0, y:0}, {x:14, y:-10, duration:0.04, yoyo:true, repeat:7, ease:"none"}, 3.87);
+      tl.fromTo("#oct-paper", {scale:1}, {scale:1.06, duration:3.2, ease:"none", immediateRender:false}, 3.9);
+      tl.fromTo("#oct-all", {opacity:1}, {opacity:0, duration:0.2, immediateRender:false}, 7.26);
+    window.__timelines["oct"] = tl;
+  </script>
+</template>
