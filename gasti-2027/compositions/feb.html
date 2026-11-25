@@ -7,6 +7,9 @@
     .ov-live b{display:block;width:16px;height:16px;border-radius:50%;background:#fff}
     .ov-title{position:absolute;left:116px;top:350px;font-family:'League Gothic';font-size:230px;line-height:.9;color:#fff;text-shadow:0 10px 60px rgba(0,0,0,.8)}
     .ov-title span{display:block}.ov-title .g1,.ov-title .g2{position:absolute;left:0;top:0}.ov-title .g1{color:#ff2a55;mix-blend-mode:screen}.ov-title .g2{color:#00e5ff;mix-blend-mode:screen}
+    .ov-days{position:absolute;left:120px;top:590px;font-family:'IBM Plex Mono';font-weight:700;font-size:30px;color:#ffc53a;display:flex;align-items:center;gap:12px;text-shadow:0 2px 12px #000}
+    .ov-days b{color:#fff;font-size:34px}.ov-days i{display:block;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2b0,#d4a020 60%,#7a5508);box-shadow:0 0 14px rgba(255,197,58,.6);position:relative;overflow:hidden}
+    .ov-days i:after{content:"";position:absolute;left:15px;top:-2px;width:4px;height:40px;background:#1a0f00;transform:rotate(25deg)}
     .ov-tag{position:absolute;left:120px;top:990px;display:flex;font-family:'Archivo Black';font-size:34px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
     .ov-tag .k{background:#d91e18;color:#fff;padding:12px 18px}.ov-tag .v{background:#fff;color:#111;padding:12px 22px;white-space:nowrap}
     
@@ -16,6 +19,7 @@
     
     <div id="feb-live" class="ov-live"><b></b>EN VIVO · MÚSICA</div>
     <div id="feb-title" class="ov-title"><span class="g1" data-layout-ignore>FEBRERO</span><span class="g2" data-layout-ignore>FEBRERO</span><span class="m">FEBRERO</span></div>
+    <div id="feb-days" class="ov-days"><i></i>DÍAS SIN TOKEN: <b id="feb-dn">27</b></div>
     <div id="feb-tag" class="ov-tag"><span class="k">2027</span><span class="v">NOMINADOS: 1</span></div>
     
   </div>
@@ -76,25 +80,28 @@ function seats(b,t){vgrad(b,"#050508","#000");beam(b,540,0,0,1250,170,"#ffffff",
  b.fillStyle="#0d0d12";b.fillRect(250,1080,580,60);
  for(let row=0;row<9;row++){const y=1260+row*row*14+row*40,s=0.5+row*0.12;for(let i=-8;i<=8;i++){const x=540+i*90*s;b.fillStyle="#1a0a10";rr(b,x-34*s,y-60*s,68*s,80*s,12*s);b.fill();b.fillStyle="#2a0f18";b.fillRect(x-34*s,y,68*s,16*s)}}
  dust(b,t,9,70,"#fff",0.4,2.5,0.6)}
-const SH=[[0,stage],[4.43,trophy],[6.17,seats]];
-function cam(t){if(t<4.43)return {z:1.05+t*0.02,...shake(t,6,1.2)};if(t<6.17)return {z:1.15-(t-4.43)*0.05};return {z:1.0+(t-6.17)*0.02}}
+const SH=[[0,stage],[3.93,trophy],[5.55,seats]];
+function cam(t){if(t<3.93)return {z:1.05+t*0.02,...shake(t,6,1.2)};if(t<5.55)return {z:1.15-(t-3.93)*0.05};return {z:1.0+(t-5.55)*0.02}}
 
     const C=document.querySelector("#feb-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
     const GREY=0.12;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-4.43)/0.14),Math.max(0,1-Math.abs(t-6.17)/0.14));composite(ctx,B,t,cam(t),g,3);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-3.93)/0.14),Math.max(0,1-Math.abs(t-5.55)/0.14));composite(ctx,B,t,cam(t),g,3);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:8.45,duration:8.45,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:7.84,duration:7.84,ease:"none",onUpdate:()=>draw(S.t)},0);
     
     tl.fromTo("#feb-live",{opacity:0,x:-40},{opacity:1,x:0,duration:.3,ease:"power3.out"},.1);
     tl.fromTo("#feb-title",{opacity:0,scale:1.8,transformOrigin:"0% 50%"},{opacity:1,scale:1,duration:.28,ease:"power4.in"},.02);
     tl.fromTo("#feb-title .g1",{x:-26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#feb-title .g2",{x:26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#feb-title",{opacity:1},{opacity:0,duration:.3,immediateRender:false},3.20);
+    tl.fromTo("#feb-days",{opacity:0,y:10},{opacity:1,y:0,duration:.3},.5);
+    {const D={v:27};tl.fromTo(D,{v:27},{v:58,duration:1.2,ease:"power2.out",onUpdate(){document.querySelector("#feb-dn").textContent=Math.round(D.v)}},.6);}
+    tl.fromTo("#feb-days",{opacity:1},{opacity:0,duration:.25,immediateRender:false},7.54);
     tl.fromTo("#feb-tag",{opacity:0,x:-60},{opacity:1,x:0,duration:.35,ease:"power3.out"},1.60);
-    tl.fromTo("#feb-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},8.15);
-    tl.fromTo("#feb-live b",{opacity:1},{opacity:.2,duration:.4,yoyo:true,repeat:19,ease:"none"},.2);
+    tl.fromTo("#feb-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},7.54);
+    tl.fromTo("#feb-live b",{opacity:1},{opacity:.2,duration:.4,yoyo:true,repeat:17,ease:"none"},.2);
     
     draw(0);
     window.__timelines["feb"]=tl;

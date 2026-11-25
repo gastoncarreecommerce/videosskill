@@ -7,6 +7,9 @@
     .ov-live b{display:block;width:16px;height:16px;border-radius:50%;background:#fff}
     .ov-title{position:absolute;left:116px;top:350px;font-family:'League Gothic';font-size:230px;line-height:.9;color:#fff;text-shadow:0 10px 60px rgba(0,0,0,.8)}
     .ov-title span{display:block}.ov-title .g1,.ov-title .g2{position:absolute;left:0;top:0}.ov-title .g1{color:#ff2a55;mix-blend-mode:screen}.ov-title .g2{color:#00e5ff;mix-blend-mode:screen}
+    .ov-days{position:absolute;left:120px;top:590px;font-family:'IBM Plex Mono';font-weight:700;font-size:30px;color:#ffc53a;display:flex;align-items:center;gap:12px;text-shadow:0 2px 12px #000}
+    .ov-days b{color:#fff;font-size:34px}.ov-days i{display:block;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2b0,#d4a020 60%,#7a5508);box-shadow:0 0 14px rgba(255,197,58,.6);position:relative;overflow:hidden}
+    .ov-days i:after{content:"";position:absolute;left:15px;top:-2px;width:4px;height:40px;background:#1a0f00;transform:rotate(25deg)}
     .ov-tag{position:absolute;left:120px;top:990px;display:flex;font-family:'Archivo Black';font-size:34px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
     .ov-tag .k{background:#d91e18;color:#fff;padding:12px 18px}.ov-tag .v{background:#fff;color:#111;padding:12px 22px;white-space:nowrap}
     
@@ -16,6 +19,7 @@
     
     <div id="jun-live" class="ov-live"><b></b>EN VIVO · SALUD ANIMAL</div>
     <div id="jun-title" class="ov-title"><span class="g1" data-layout-ignore>JUNIO</span><span class="g2" data-layout-ignore>JUNIO</span><span class="m">JUNIO</span></div>
+    <div id="jun-days" class="ov-days"><i></i>DÍAS SIN TOKEN: <b id="jun-dn">147</b></div>
     <div id="jun-tag" class="ov-tag"><span class="k">2027</span><span class="v">DIAGNÓSTICO: DESCONOCIDO</span></div>
     
   </div>
@@ -66,24 +70,27 @@ function vet(b,t){fill(b,"#020807");glow(b,540,800,700,"#00ff99",0.1);
  b.strokeStyle="rgba(0,255,150,0.12)";b.lineWidth=2;for(let x=0;x<W;x+=60){b.beginPath();b.moveTo(x,300);b.lineTo(x,1300);b.stroke()}for(let y=300;y<=1300;y+=60){b.beginPath();b.moveTo(0,y);b.lineTo(W,y);b.stroke()}
  b.strokeStyle="#3dff9a";b.lineWidth=6;b.shadowColor="#3dff9a";b.shadowBlur=20;b.beginPath();for(let x=0;x<=W;x+=4){const ph=(x/W*3+t*1.5)%1;let y=800;if(ph>0.42&&ph<0.46)y-=260*Math.sin((ph-0.42)/0.04*Math.PI);else if(ph>0.47&&ph<0.5)y+=110*Math.sin((ph-0.47)/0.03*Math.PI);y+=(hash(Math.floor(x/4)+Math.floor(t*20))-.5)*14;x?b.lineTo(x,y):b.moveTo(x,y)}b.stroke();b.shadowBlur=0;
  txt(b,"?",540,1120,"400 300px 'League Gothic'","rgba(255,60,60,"+(0.6+0.4*Math.sin(t*6))+")");txt(b,"FELIS CATUS · CAUSA DESCONOCIDA",540,420,"700 34px 'IBM Plex Mono'","#3dff9a")}
-const SH=[[0,(b,t)=>apt(b,t,0)],[5.27,vet],[7.39,(b,t)=>apt(b,t+3,ss(2.66,3.26,t))]];
-function cam(t){if(t<5.27)return {z:1.0+t*0.02};if(t<7.39)return {z:1.05,...shake(t,3,3)};const k=t-7.39;return {z:1.15+k*0.05,y:k*10}}
+const SH=[[0,(b,t)=>apt(b,t,0)],[5.19,vet],[7.55,(b,t)=>apt(b,t+3,ss(2.34,2.94,t))]];
+function cam(t){if(t<5.19)return {z:1.0+t*0.02};if(t<7.55)return {z:1.05,...shake(t,3,3)};const k=t-7.55;return {z:1.15+k*0.05,y:k*10}}
 
     const C=document.querySelector("#jun-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
     const GREY=0.35;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-5.27)/0.14),Math.max(0,1-Math.abs(t-7.39)/0.14));composite(ctx,B,t,cam(t),g,7);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-5.19)/0.14),Math.max(0,1-Math.abs(t-7.55)/0.14));composite(ctx,B,t,cam(t),g,7);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:12.13,duration:12.13,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:12.16,duration:12.16,ease:"none",onUpdate:()=>draw(S.t)},0);
     
     tl.fromTo("#jun-live",{opacity:0,x:-40},{opacity:1,x:0,duration:.3,ease:"power3.out"},.1);
     tl.fromTo("#jun-title",{opacity:0,scale:1.8,transformOrigin:"0% 50%"},{opacity:1,scale:1,duration:.28,ease:"power4.in"},.02);
     tl.fromTo("#jun-title .g1",{x:-26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#jun-title .g2",{x:26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#jun-title",{opacity:1},{opacity:0,duration:.3,immediateRender:false},3.20);
+    tl.fromTo("#jun-days",{opacity:0,y:10},{opacity:1,y:0,duration:.3},.5);
+    {const D={v:147};tl.fromTo(D,{v:147},{v:178,duration:1.2,ease:"power2.out",onUpdate(){document.querySelector("#jun-dn").textContent=Math.round(D.v)}},.6);}
+    tl.fromTo("#jun-days",{opacity:1},{opacity:0,duration:.25,immediateRender:false},11.86);
     tl.fromTo("#jun-tag",{opacity:0,x:-60},{opacity:1,x:0,duration:.35,ease:"power3.out"},1.60);
-    tl.fromTo("#jun-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},11.83);
+    tl.fromTo("#jun-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},11.86);
     tl.fromTo("#jun-live b",{opacity:1},{opacity:.2,duration:.4,yoyo:true,repeat:29,ease:"none"},.2);
     
     draw(0);

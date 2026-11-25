@@ -7,6 +7,9 @@
     .ov-live b{display:block;width:16px;height:16px;border-radius:50%;background:#fff}
     .ov-title{position:absolute;left:116px;top:350px;font-family:'League Gothic';font-size:230px;line-height:.9;color:#fff;text-shadow:0 10px 60px rgba(0,0,0,.8)}
     .ov-title span{display:block}.ov-title .g1,.ov-title .g2{position:absolute;left:0;top:0}.ov-title .g1{color:#ff2a55;mix-blend-mode:screen}.ov-title .g2{color:#00e5ff;mix-blend-mode:screen}
+    .ov-days{position:absolute;left:120px;top:590px;font-family:'IBM Plex Mono';font-weight:700;font-size:30px;color:#ffc53a;display:flex;align-items:center;gap:12px;text-shadow:0 2px 12px #000}
+    .ov-days b{color:#fff;font-size:34px}.ov-days i{display:block;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2b0,#d4a020 60%,#7a5508);box-shadow:0 0 14px rgba(255,197,58,.6);position:relative;overflow:hidden}
+    .ov-days i:after{content:"";position:absolute;left:15px;top:-2px;width:4px;height:40px;background:#1a0f00;transform:rotate(25deg)}
     .ov-tag{position:absolute;left:120px;top:990px;display:flex;font-family:'Archivo Black';font-size:34px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
     .ov-tag .k{background:#d91e18;color:#fff;padding:12px 18px}.ov-tag .v{background:#fff;color:#111;padding:12px 22px;white-space:nowrap}
     
@@ -16,6 +19,7 @@
     
     <div id="mar-live" class="ov-live"><b></b>EN VIVO · CLIMA</div>
     <div id="mar-title" class="ov-title"><span class="g1" data-layout-ignore>MARZO</span><span class="g2" data-layout-ignore>MARZO</span><span class="m">MARZO</span></div>
+    <div id="mar-days" class="ov-days"><i></i>DÍAS SIN TOKEN: <b id="mar-dn">58</b></div>
     <div id="mar-tag" class="ov-tag"><span class="k">2027</span><span class="v">52 °C · SIN LUZ · SIN AGUA</span></div>
     
   </div>
@@ -71,24 +75,27 @@ function faucet(b,t){fill(b,lg(b,0,0,0,H,[[0,"#1a120a"],[1,"#0a0705"]]));
  const chrome=lg(b,0,600,0,760,[[0,"#eee"],[0.5,"#777"],[1,"#ccc"]]);b.fillStyle=chrome;rr(b,140,620,520,130,40);b.fill();rr(b,560,620,120,420,50);b.fill();b.fillRect(300,520,90,110);rr(b,220,480,250,60,30);b.fill();glow(b,600,700,300,"#fff",0.2);
  const n=Math.floor(t*1.6);for(let i=0;i<3;i++){const st=i*0.62;const k=t-st;if(k<0||i>=2)continue;b.fillStyle="#9cd2ff";b.beginPath();b.ellipse(620,1040+k*k*1800,12,18,0,0,6.283);b.fill()}
  txt(b,"SIN AGUA",540,1420,"400 200px 'League Gothic'","rgba(255,255,255,0.12)")}
-const SH=[[0,heat],[3.97,blackout],[5.17,faucet]];
-function cam(t){if(t<3.97)return {z:1.02+t*0.03,...shake(t,5,2)};if(t<5.17)return {z:1.1-(t-3.97)*0.03};return {z:1.0+(t-5.17)*0.04}}
+const SH=[[0,heat],[4.29,blackout],[5.41,faucet]];
+function cam(t){if(t<4.29)return {z:1.02+t*0.03,...shake(t,5,2)};if(t<5.41)return {z:1.1-(t-4.29)*0.03};return {z:1.0+(t-5.41)*0.04}}
 
     const C=document.querySelector("#mar-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
     const GREY=0.17;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-3.97)/0.14),Math.max(0,1-Math.abs(t-5.17)/0.14));composite(ctx,B,t,cam(t),g,4);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-4.29)/0.14),Math.max(0,1-Math.abs(t-5.41)/0.14));composite(ctx,B,t,cam(t),g,4);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:8.37,duration:8.37,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:8.63,duration:8.63,ease:"none",onUpdate:()=>draw(S.t)},0);
     
     tl.fromTo("#mar-live",{opacity:0,x:-40},{opacity:1,x:0,duration:.3,ease:"power3.out"},.1);
     tl.fromTo("#mar-title",{opacity:0,scale:1.8,transformOrigin:"0% 50%"},{opacity:1,scale:1,duration:.28,ease:"power4.in"},.02);
     tl.fromTo("#mar-title .g1",{x:-26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#mar-title .g2",{x:26,opacity:.9},{x:0,opacity:0,duration:.6,ease:"power2.out"},.3);
     tl.fromTo("#mar-title",{opacity:1},{opacity:0,duration:.3,immediateRender:false},3.20);
+    tl.fromTo("#mar-days",{opacity:0,y:10},{opacity:1,y:0,duration:.3},.5);
+    {const D={v:58};tl.fromTo(D,{v:58},{v:86,duration:1.2,ease:"power2.out",onUpdate(){document.querySelector("#mar-dn").textContent=Math.round(D.v)}},.6);}
+    tl.fromTo("#mar-days",{opacity:1},{opacity:0,duration:.25,immediateRender:false},8.33);
     tl.fromTo("#mar-tag",{opacity:0,x:-60},{opacity:1,x:0,duration:.35,ease:"power3.out"},1.60);
-    tl.fromTo("#mar-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},8.07);
+    tl.fromTo("#mar-tag",{opacity:1},{opacity:0,duration:.2,immediateRender:false},8.33);
     tl.fromTo("#mar-live b",{opacity:1},{opacity:.2,duration:.4,yoyo:true,repeat:19,ease:"none"},.2);
     
     draw(0);

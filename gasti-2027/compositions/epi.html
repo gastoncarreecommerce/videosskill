@@ -7,6 +7,9 @@
     .ov-live b{display:block;width:16px;height:16px;border-radius:50%;background:#fff}
     .ov-title{position:absolute;left:116px;top:350px;font-family:'League Gothic';font-size:230px;line-height:.9;color:#fff;text-shadow:0 10px 60px rgba(0,0,0,.8)}
     .ov-title span{display:block}.ov-title .g1,.ov-title .g2{position:absolute;left:0;top:0}.ov-title .g1{color:#ff2a55;mix-blend-mode:screen}.ov-title .g2{color:#00e5ff;mix-blend-mode:screen}
+    .ov-days{position:absolute;left:120px;top:590px;font-family:'IBM Plex Mono';font-weight:700;font-size:30px;color:#ffc53a;display:flex;align-items:center;gap:12px;text-shadow:0 2px 12px #000}
+    .ov-days b{color:#fff;font-size:34px}.ov-days i{display:block;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2b0,#d4a020 60%,#7a5508);box-shadow:0 0 14px rgba(255,197,58,.6);position:relative;overflow:hidden}
+    .ov-days i:after{content:"";position:absolute;left:15px;top:-2px;width:4px;height:40px;background:#1a0f00;transform:rotate(25deg)}
     .ov-tag{position:absolute;left:120px;top:990px;display:flex;font-family:'Archivo Black';font-size:34px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
     .ov-tag .k{background:#d91e18;color:#fff;padding:12px 18px}.ov-tag .v{background:#fff;color:#111;padding:12px 22px;white-space:nowrap}
     #epi-date{position:absolute;left:120px;top:300px;font-size:34px;color:#aaa;letter-spacing:.08em}
@@ -57,18 +60,18 @@ function room(b,t){vgrad(b,"#0b0b0c","#151516");b.fillStyle="#2a2c30";b.fillRect
  b.fillStyle="#3a2414";rr(b,700,1100,280,150,10);b.fill();b.strokeStyle="#6a5a30";b.lineWidth=5;b.stroke();
  person(b,390,1420,1.9,"#000");dust(b,t,2,70,"#aaa",0.3,2,0.4);desat(b,1)}
 function end(b,t){fill(b,"#000");txt(b,"2027",540,900,"400 300px 'League Gothic'","rgba(255,255,255,"+(0.18*ss(0.2,1.2,t))+")")}
-const SH=[[0,room],[7.6,end]];
+const SH=[[0,room],[8.71,end]];
 function cam(t){return {z:1.0+t*0.015}}
 
     const C=document.querySelector("#epi-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
     const GREY=0.75;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-7.6)/0.14));composite(ctx,B,t,cam(t),g,14);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-8.71)/0.14));composite(ctx,B,t,cam(t),g,14);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:10.4,duration:10.4,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:11.51,duration:11.51,ease:"none",onUpdate:()=>draw(S.t)},0);
     
-    tl.fromTo("#epi-date",{opacity:0},{opacity:1,duration:.6},.4);tl.fromTo("#epi-date",{opacity:1},{opacity:0,duration:.3,immediateRender:false},7.30);
+    tl.fromTo("#epi-date",{opacity:0},{opacity:1,duration:.6},.4);tl.fromTo("#epi-date",{opacity:1},{opacity:0,duration:.3,immediateRender:false},8.41);
     draw(0);
     window.__timelines["epi"]=tl;
   })();

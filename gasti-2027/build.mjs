@@ -14,7 +14,7 @@ for (const id of ["pro","ene","feb","mar","abr","may","jun","jul","ago","sep","o
 function wAt(id, w, nth = 0) {
   const ws = tx(id).words.filter((x) => x.type === "word");
   const norm = (x) => x.text.toLowerCase().replace(/[^\p{L}\d]/gu, "");
-  const hits = ws.filter((x) => w === "gasti" ? /^(gast|gust|gas)/.test(norm(x)) : norm(x).startsWith(w.toLowerCase()));
+  const hits = ws.filter((x) => w === "gasti" ? /^(gh?ast|gust)/.test(norm(x)) : norm(x).startsWith(w.toLowerCase()));
   if (!hits[nth]) throw new Error(`word ${w} not in ${id}`);
   return hits[nth].start;
 }
@@ -66,7 +66,7 @@ function monthDur(vo) { return +(VO_AT + VODUR[vo] + 0.8).toFixed(2); }
 // --- PROLOGUE
 {
   const at = 0.6, id = "pro";
-  const tC = +(at + wAt(id, "cinco") - 0.15).toFixed(2), tU = at + wAt(id, "último"), tG = at + wAt(id, "gasti", 1), tN = at + wAt(id, "esa"), tP = +(at + wAt(id, "pero")).toFixed(2);
+  const tC = +(at + wAt(id, "5") - 0.15).toFixed(2), tU = at + wAt(id, "último"), tG = at + wAt(id, "gasti", 1), tN = at + wAt(id, "esa"), tP = +(at + wAt(id, "pero")).toFixed(2);
   const dur = +(at + VODUR.pro + 1.2).toFixed(2);
   scenes.push({
     id, dur, vo: [["pro", at]], cuts: [tC, tU, tG, tN, tP],
@@ -575,7 +575,7 @@ function captions() {
     let cur = [];
     const flush = () => { if (cur.length) { chunks.push({ text: cur.map((w) => w.text).join(" "), start: s.start + off + cur[0].start, end: s.start + off + cur[cur.length - 1].end }); cur = []; } };
     for (const w of words) {
-      w.text = w.text.replace(/^Gusty/i, "Gasti");
+      w.text = w.text.replace(/["“”]/g, "").replace(/^(Ghasty|Gasty|Gusty|Gasti)/i, "Gasti");
       cur.push(w);
       if (/[.,:;!?]$/.test(w.text) || cur.length >= 3) flush();
     }
