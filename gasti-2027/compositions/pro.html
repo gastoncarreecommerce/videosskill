@@ -15,12 +15,12 @@
     #pro-date{position:absolute;left:120px;top:300px;font-size:34px;color:#ff4a4a;letter-spacing:.08em}
         #pro-big{position:absolute;left:120px;width:780px;top:340px;font-family:'League Gothic';font-size:150px;line-height:.9;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.9)}
         #pro-big span{display:block}#pro-big .red{color:#ff3b30}
-        #pro-q{position:absolute;left:120px;width:780px;top:330px;font-family:'League Gothic';font-size:136px;line-height:.92;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.95)}#pro-q span{display:block}#pro-q .red{color:#ffc53a}
+        #pro-q{position:absolute;left:120px;width:780px;top:330px;font-family:'League Gothic';font-size:118px;line-height:.92;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.95)}#pro-q span{display:block}#pro-q .red{color:#ffc53a}
   </style>
   <div id="root" data-composition-id="pro" data-width="1080" data-height="1920">
     <canvas id="pro-c" width="1080" height="1920"></canvas>
     
-    <div id="pro-q"><span>¿QUÉ PASARÍA SI</span><span>GASTI NO GANA</span><span class="red">EL TOKEN PIRATA?</span></div><div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
+    <div id="pro-q"><span>ASÍ SERÍA EL FUTURO</span><span>SI GASTI NO ENCUENTRA</span><span class="red">EL TOKEN PIRATA</span><span class="red">DE FORTNITE</span></div><div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
         <div id="pro-big"><span>GASTI NO CONSIGUIÓ</span><span class="red">EL TOKEN PIRATA</span></div>
   </div>
   <script>
@@ -93,22 +93,22 @@ function globe(b,t){fill(b,"#020306");for(let i=0;i<200;i++){b.fillStyle="#fff";
  const cx=540,cy=980,R0=360;glow(b,cx,cy,520,"#3a7bff",0.35);b.fillStyle=rg(b,cx-120,cy-140,40,R0,[[0,"#3f7fd0"],[1,"#0a1c3a"]]);b.beginPath();b.arc(cx,cy,R0,0,6.283);b.fill();
  b.save();b.beginPath();b.arc(cx,cy,R0,0,6.283);b.clip();b.fillStyle="#2f6a3a";const sp=t*20;for(const [x,y,rx,ry] of [[-120,-120,130,90],[90,-60,110,150],[-60,140,90,70],[160,160,70,60]]){b.beginPath();b.ellipse(cx+((x+sp+500)%720)-360,cy+y,rx,ry,0.3,0,6.283);b.fill()}b.restore();
  const p=ss(0.1,2.2,t);b.strokeStyle="#ff3b1f";b.lineWidth=7;b.shadowColor="#ff3b1f";b.shadowBlur=24;const r=R(9);for(let k=0;k<7;k++){let a=r()*6.283,x=cx+Math.cos(a)*30,y=cy+Math.sin(a)*30;b.beginPath();b.moveTo(x,y);const n=Math.floor(p*9);for(let j=0;j<n;j++){a+=(r()-.5)*0.9;x+=Math.cos(a)*45;y+=Math.sin(a)*45;if(Math.hypot(x-cx,y-cy)>R0)break;b.lineTo(x,y)}b.stroke()}b.shadowBlur=0;glow(b,cx,cy,200,"#ff5a1f",0.4*p)}
-const SH=[[0,coin],[4.83,(b,t)=>room(b,t,1,false)],[10,(b,t)=>chest(b,t,eo((t-0.5)/0.6),ss(0.4,1.2,t),false)],[11.28,(b,t)=>chest(b,t+3,1,1,true)],[13.719999999999999,(b,t)=>room(b,t,0.6,true)],[16.62,globe]];
-function cam(t){if(t<4.83)return {z:1.0+t*0.02};if(t>=16.62){const k=t-16.62;return {z:1.0+k*0.04,...shake(t,k<0.8?18:3,8)}}if(t<10)return {z:1.0+(t-4.83)*0.012,...shake(t,6,1.5)};if(t<11.28){const k=t-10;return {z:1.05+k*0.03,...shake(t,k>0.5&&k<1.1?26:5,9)}}if(t<13.719999999999999){const k=t-11.28;return {z:1.25-k*0.04,...shake(t,4,2)}}return {z:1.12-(t-13.719999999999999)*0.02,x:0,y:0}}
+const SH=[[0,coin],[5.21,(b,t)=>room(b,t,1,false)],[10.379999999999999,(b,t)=>chest(b,t,eo((t-0.5)/0.6),ss(0.4,1.2,t),false)],[12.06,(b,t)=>chest(b,t+3,1,1,true)],[14.46,(b,t)=>room(b,t,0.6,true)],[16.49,globe]];
+function cam(t){if(t<5.21)return {z:1.0+t*0.02};if(t>=16.49){const k=t-16.49;return {z:1.0+k*0.04,...shake(t,k<0.8?18:3,8)}}if(t<10.379999999999999)return {z:1.0+(t-5.21)*0.012,...shake(t,6,1.5)};if(t<12.06){const k=t-10.379999999999999;return {z:1.05+k*0.03,...shake(t,k>0.5&&k<1.1?26:5,9)}}if(t<14.46){const k=t-12.06;return {z:1.25-k*0.04,...shake(t,4,2)}}return {z:1.12-(t-14.46)*0.02,x:0,y:0}}
 
     const C=document.querySelector("#pro-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
     const GREY=0.00;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-4.83)/0.14),Math.max(0,1-Math.abs(t-10)/0.14),Math.max(0,1-Math.abs(t-11.28)/0.14),Math.max(0,1-Math.abs(t-13.719999999999999)/0.14),Math.max(0,1-Math.abs(t-16.62)/0.14));composite(ctx,B,t,cam(t),g,1);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-5.21)/0.14),Math.max(0,1-Math.abs(t-10.379999999999999)/0.14),Math.max(0,1-Math.abs(t-12.06)/0.14),Math.max(0,1-Math.abs(t-14.46)/0.14),Math.max(0,1-Math.abs(t-16.49)/0.14));composite(ctx,B,t,cam(t),g,1);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:21.03,duration:21.03,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:19.59,duration:19.59,ease:"none",onUpdate:()=>draw(S.t)},0);
     
-    tl.fromTo("#pro-q",{opacity:0,scale:1.15,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.4,ease:"power3.out"},.05);tl.fromTo("#pro-q",{opacity:1},{opacity:0,duration:.2,immediateRender:false},4.63);
-        tl.fromTo("#pro-date",{opacity:0},{opacity:1,duration:.3},4.83);
-        tl.fromTo("#pro-date",{opacity:1},{opacity:0,duration:.2,immediateRender:false},9.80);
-        tl.fromTo("#pro-big",{opacity:0,scale:1.4,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.25,ease:"power4.in"},11.23);
-        tl.fromTo("#pro-big",{opacity:1},{opacity:0,duration:.2,immediateRender:false},13.57);
+    tl.fromTo("#pro-q",{opacity:0,scale:1.15,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.4,ease:"power3.out"},.05);tl.fromTo("#pro-q",{opacity:1},{opacity:0,duration:.2,immediateRender:false},5.01);
+        tl.fromTo("#pro-date",{opacity:0},{opacity:1,duration:.3},5.21);
+        tl.fromTo("#pro-date",{opacity:1},{opacity:0,duration:.2,immediateRender:false},10.18);
+        tl.fromTo("#pro-big",{opacity:0,scale:1.4,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.25,ease:"power4.in"},12.01);
+        tl.fromTo("#pro-big",{opacity:1},{opacity:0,duration:.2,immediateRender:false},14.31);
     draw(0);
     window.__timelines["pro"]=tl;
   })();

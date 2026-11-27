@@ -59,19 +59,19 @@ function room(b,t){vgrad(b,"#0b0b0c","#151516");b.fillStyle="#2a2c30";b.fillRect
  glow(b,810,620,600,"#c0c6d0",0.45);glow(b,390,1180,380,"#9aa0a8",0.25);b.fillStyle="#050506";b.fillRect(0,1240,W,680);b.fillStyle="#0a0a0c";b.fillRect(130,760,520,330);b.fillStyle="#1a1b1e";b.fillRect(146,776,488,298);
  b.fillStyle="#3a2414";rr(b,700,1100,280,150,10);b.fill();b.strokeStyle="#6a5a30";b.lineWidth=5;b.stroke();
  person(b,390,1420,1.9,"#000");dust(b,t,2,70,"#aaa",0.3,2,0.4);desat(b,1)}
-function end(b,t){fill(b,"#000");txt(b,"2027",540,900,"400 300px 'League Gothic'","rgba(255,255,255,"+(0.18*ss(0.2,1.2,t))+")")}
-const SH=[[0,room],[8.71,end]];
+function end(b,t){fill(b,"#000");const a=ss(0.1,0.8,t);glow(b,540,1000,400,"#ffb020",0.25*a);b.save();b.globalAlpha=a;b.translate(540,1010);b.fillStyle=lg(b,-150,-150,150,150,[[0,"#fff2b0"],[0.5,"#d4a020"],[1,"#6e4c06"]]);b.beginPath();b.arc(0,0,150,0,6.283);b.fill();b.strokeStyle="#000";b.lineWidth=14;b.beginPath();b.moveTo(-30,-160);b.lineTo(20,-40);b.lineTo(-20,40);b.lineTo(30,160);b.stroke();b.restore();txt(b,"TODO POR NO ENCONTRAR",540,420,"400 104px 'League Gothic'","rgba(255,255,255,"+a+")");txt(b,"EL TOKEN PIRATA",540,540,"400 140px 'League Gothic'","rgba(255,197,58,"+a+")")}
+const SH=[[0,room],[10.98,end]];
 function cam(t){return {z:1.0+t*0.015}}
 
     const C=document.querySelector("#epi-c"),ctx=C.getContext("2d");
     const B=document.createElement("canvas");B.width=W;B.height=H;const b=B.getContext("2d");
-    const GREY=0.75;
+    const GREY=0.00;
     function draw(t){let k=0;for(let i=0;i<SH.length;i++)if(t>=SH[i][0])k=i;b.save();b.setTransform(1,0,0,1,0,0);b.globalAlpha=1;b.globalCompositeOperation="source-over";SH[k][1](b,t-SH[k][0]);b.restore();desat(b,GREY);
-      const g=Math.max(0,Math.max(0,1-Math.abs(t-8.71)/0.14));composite(ctx,B,t,cam(t),g,14);}
+      const g=Math.max(0,Math.max(0,1-Math.abs(t-10.98)/0.14));composite(ctx,B,t,cam(t),g,14);}
     const tl=gsap.timeline({paused:true});const S={t:0};
-    tl.fromTo(S,{t:0},{t:11.51,duration:11.51,ease:"none",onUpdate:()=>draw(S.t)},0);
+    tl.fromTo(S,{t:0},{t:13.78,duration:13.78,ease:"none",onUpdate:()=>draw(S.t)},0);
     
-    tl.fromTo("#epi-date",{opacity:0},{opacity:1,duration:.6},.4);tl.fromTo("#epi-date",{opacity:1},{opacity:0,duration:.3,immediateRender:false},8.41);
+    tl.fromTo("#epi-date",{opacity:0},{opacity:1,duration:.6},.4);tl.fromTo("#epi-date",{opacity:1},{opacity:0,duration:.3,immediateRender:false},10.68);
     draw(0);
     window.__timelines["epi"]=tl;
   })();

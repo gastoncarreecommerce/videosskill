@@ -66,7 +66,7 @@ function monthDur(vo) { return +(VO_AT + VODUR[vo] + 0.8).toFixed(2); }
 // --- PROLOGUE
 {
   const at = 0.6, id = "pro";
-  const tC = +(at + wAt(id, "5") - 0.15).toFixed(2), tU = at + wAt(id, "último"), tG = at + wAt(id, "gasti", 1), tN = at + wAt(id, "esa"), tP = +(at + wAt(id, "pero")).toFixed(2);
+  const tC = +(at + wAt(id, "5") - 0.15).toFixed(2), tU = at + wAt(id, "último"), tG = at + wAt(id, "gasti", 1), tN = +(at + wAt(id, "partir") - 0.3).toFixed(2), tP = +(at + wAt(id, "mundo") - 0.25).toFixed(2);
   const dur = +(at + VODUR.pro + 1.2).toFixed(2);
   scenes.push({
     id, dur, vo: [["pro", at]], cuts: [tC, tU, tG, tN, tP],
@@ -110,12 +110,12 @@ const SH=[[0,coin],[${tC},(b,t)=>room(b,t,1,false)],[${tU},(b,t)=>chest(b,t,eo((
 function cam(t){if(t<${tC})return {z:1.0+t*0.02};if(t>=${tP}){const k=t-${tP};return {z:1.0+k*0.04,...shake(t,k<0.8?18:3,8)}}if(t<${tU})return {z:1.0+(t-${tC})*0.012,...shake(t,6,1.5)};if(t<${tG}){const k=t-${tU};return {z:1.05+k*0.03,...shake(t,k>0.5&&k<1.1?26:5,9)}}if(t<${tN}){const k=t-${tG};return {z:1.25-k*0.04,...shake(t,4,2)}}return {z:1.12-(t-${tN})*0.02,x:0,y:0}}
 `,
     overlay: {
-      html: `<div id="pro-q"><span>¿QUÉ PASARÍA SI</span><span>GASTI NO GANA</span><span class="red">EL TOKEN PIRATA?</span></div><div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
+      html: `<div id="pro-q"><span>ASÍ SERÍA EL FUTURO</span><span>SI GASTI NO ENCUENTRA</span><span class="red">EL TOKEN PIRATA</span><span class="red">DE FORTNITE</span></div><div id="pro-date" class="ov-mono">5 DIC 2026 · 23:59</div>
         <div id="pro-big"><span>GASTI NO CONSIGUIÓ</span><span class="red">EL TOKEN PIRATA</span></div>`,
       css: `#pro-date{position:absolute;left:120px;top:300px;font-size:34px;color:#ff4a4a;letter-spacing:.08em}
         #pro-big{position:absolute;left:120px;width:780px;top:340px;font-family:'League Gothic';font-size:150px;line-height:.9;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.9)}
         #pro-big span{display:block}#pro-big .red{color:#ff3b30}
-        #pro-q{position:absolute;left:120px;width:780px;top:330px;font-family:'League Gothic';font-size:136px;line-height:.92;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.95)}#pro-q span{display:block}#pro-q .red{color:#ffc53a}`,
+        #pro-q{position:absolute;left:120px;width:780px;top:330px;font-family:'League Gothic';font-size:118px;line-height:.92;color:#fff;text-shadow:0 0 40px rgba(0,0,0,.95)}#pro-q span{display:block}#pro-q .red{color:#ffc53a}`,
       tl: `tl.fromTo("#pro-q",{opacity:0,scale:1.15,transformOrigin:"0 50%"},{opacity:1,scale:1,duration:.4,ease:"power3.out"},.05);tl.fromTo("#pro-q",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(tC - 0.2).toFixed(2)});
         tl.fromTo("#pro-date",{opacity:0},{opacity:1,duration:.3},${tC});
         tl.fromTo("#pro-date",{opacity:1},{opacity:0,duration:.2,immediateRender:false},${(tU - 0.2).toFixed(2)});
@@ -449,13 +449,13 @@ function cam(t){if(t<${n2})return {z:1.0+t*0.03};return {z:1.0+(t-${n2})*0.02}}
 {
   const at = 1.0, dur = +(at + VODUR.epi + 3.4).toFixed(2), id = "epi";
   const end = +(at + VODUR.epi + 0.6).toFixed(2);
-  scenes.push({ id, dur, vo: [["epi", at]], cuts: [end], sfx: [["wind", 0.2, 0.7], ["static", end - 0.1, 0.4]],
+  scenes.push({ id, dur, grey: 0, vo: [["epi", at]], cuts: [end], sfx: [["wind", 0.2, 0.7], ["static", end - 0.1, 0.4]],
     js: String.raw`
 function room(b,t){vgrad(b,"#0b0b0c","#151516");b.fillStyle="#2a2c30";b.fillRect(640,360,340,520);b.strokeStyle="#000";b.lineWidth=14;b.strokeRect(640,360,340,520);
  glow(b,810,620,600,"#c0c6d0",0.45);glow(b,390,1180,380,"#9aa0a8",0.25);b.fillStyle="#050506";b.fillRect(0,1240,W,680);b.fillStyle="#0a0a0c";b.fillRect(130,760,520,330);b.fillStyle="#1a1b1e";b.fillRect(146,776,488,298);
  b.fillStyle="#3a2414";rr(b,700,1100,280,150,10);b.fill();b.strokeStyle="#6a5a30";b.lineWidth=5;b.stroke();
  person(b,390,1420,1.9,"#000");dust(b,t,2,70,"#aaa",0.3,2,0.4);desat(b,1)}
-function end(b,t){fill(b,"#000");txt(b,"2027",540,900,"400 300px 'League Gothic'","rgba(255,255,255,"+(0.18*ss(0.2,1.2,t))+")")}
+function end(b,t){fill(b,"#000");const a=ss(0.1,0.8,t);glow(b,540,1000,400,"#ffb020",0.25*a);b.save();b.globalAlpha=a;b.translate(540,1010);b.fillStyle=lg(b,-150,-150,150,150,[[0,"#fff2b0"],[0.5,"#d4a020"],[1,"#6e4c06"]]);b.beginPath();b.arc(0,0,150,0,6.283);b.fill();b.strokeStyle="#000";b.lineWidth=14;b.beginPath();b.moveTo(-30,-160);b.lineTo(20,-40);b.lineTo(-20,40);b.lineTo(30,160);b.stroke();b.restore();txt(b,"TODO POR NO ENCONTRAR",540,420,"400 104px 'League Gothic'","rgba(255,255,255,"+a+")");txt(b,"EL TOKEN PIRATA",540,540,"400 140px 'League Gothic'","rgba(255,197,58,"+a+")")}
 const SH=[[0,room],[${end},end]];
 function cam(t){return {z:1.0+t*0.015}}
 `,
@@ -629,9 +629,10 @@ const jul = scenes.find((s) => s.id === "jul").start;
 const oct = scenes.find((s) => s.id === "oct");
 const blackStart = oct.start + oct.cuts[2], slamAbs = oct.start + oct.cuts[3];
 function bed(file, from, to, vol) { for (let t = from; t < to - 0.5; t += 20.5) { const d = Math.min(22.0, to - t); placeAudio(file, t, d, vol, "music", ` data-fade-in="${t === from ? 0.8 : 1.5}" data-fade-out="1.5"`); } }
-bed("assets/music/bed1.mp3", 0, jul + 1.5, gain("music/bed1", -32));
-bed("assets/music/bed2.mp3", jul, blackStart + 0.3, gain("music/bed2", -31));
-bed("assets/music/bed2.mp3", slamAbs + 0.6, TOTAL, gain("music/bed2", -30));
+// song: Hitman (Kevin MacLeod, CC BY 4.0), cut out during the october blackout and back on the slam
+const MV = gain("music/hitman", -25);
+placeAudio("assets/music/hitman.mp3", 0, blackStart + 0.4, MV, "music", ` data-fade-in="1.0" data-fade-out="0.4"`);
+placeAudio("assets/music/hitman.mp3", slamAbs + 0.3, TOTAL - slamAbs - 0.3, MV, "music", ` data-media-start="${(slamAbs + 0.3).toFixed(3)}" data-fade-in="0.6" data-fade-out="3.0"`);
 
 // ------------------------------------------------------------------ index
 const hosts = scenes.map((s) => `<div id="${s.id}" class="clip" data-composition-id="${s.id}" data-composition-src="compositions/${s.id}.html" data-start="${s.start}" data-duration="${s.dur}" data-track-index="1" data-track-kind="graphics" data-width="${W}" data-height="${H}"></div>`);
