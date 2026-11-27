@@ -606,6 +606,10 @@ function captions() {
 // ------------------------------------------------------------------ audio
 const SFXDUR = {}; for (const f of fs.readdirSync(path.join(ROOT, "assets/sfx"))) SFXDUR[f.replace(".mp3", "")] = null;
 const sfxLen = JSON.parse(fs.readFileSync(path.join(ROOT, "sfxlen.json"), "utf8"));
+const LOUD = JSON.parse(fs.readFileSync(path.join(ROOT, "loudness.json"), "utf8"));
+// target loudness (LUFS) per sound, voice sits at -16: music ~16 dB under, effects 8-14 dB under
+const SFX_TARGET = { boom1: -25, boom2: -26, riser: -27, chest: -27, coin: -28, power: -28, ice: -29, water: -30, wind: -32, crowd: -32, flash: -29, press: -29, heart: -27, cat: -29, alarm: -30, tvoff: -28, whoosh1: -30, whoosh2: -30 };
+const gain = (key, target) => Math.min(3.9, Math.pow(10, (target - LOUD[key]) / 20)).toFixed(3);
 const audio = []; let an = 0;
 const lanes = {};
 function placeAudio(src, start, dur, vol, kind, extra = "") {
@@ -617,7 +621,7 @@ function placeAudio(src, start, dur, vol, kind, extra = "") {
 }
 for (const s of scenes) {
   for (const [vid, off] of s.vo) placeAudio(`assets/vo/${vid}.mp3`, s.start + off, VODUR[vid], 1, "vo");
-  for (const [name, t, vol] of s.sfx.filter(([n]) => !/^(glitch|static)/.test(n))) placeAudio(`assets/sfx/${name}.mp3`, Math.max(0, s.start + t), sfxLen[name], vol, "sfx");
+  for (const [name, t] of s.sfx.filter(([n]) => !/^(glitch|static)/.test(n))) placeAudio(`assets/sfx/${name}.mp3`, Math.max(0, s.start + t), sfxLen[name], gain("sfx/" + name, (s.id === "oct" && /boom/.test(name) ? -21 : SFX_TARGET[name] ?? -28)), "sfx");
   // a static burst on every scene cut
 }
 // music: bed1 until julio, bed2 after; silence during october blackout
@@ -625,9 +629,9 @@ const jul = scenes.find((s) => s.id === "jul").start;
 const oct = scenes.find((s) => s.id === "oct");
 const blackStart = oct.start + oct.cuts[2], slamAbs = oct.start + oct.cuts[3];
 function bed(file, from, to, vol) { for (let t = from; t < to - 0.5; t += 20.5) { const d = Math.min(22.0, to - t); placeAudio(file, t, d, vol, "music", ` data-fade-in="${t === from ? 0.8 : 1.5}" data-fade-out="1.5"`); } }
-bed("assets/music/bed1.mp3", 0, jul + 1.5, 0.32);
-bed("assets/music/bed2.mp3", jul, blackStart + 0.3, 0.34);
-bed("assets/music/bed2.mp3", slamAbs + 0.6, TOTAL, 0.36);
+bed("assets/music/bed1.mp3", 0, jul + 1.5, gain("music/bed1", -32));
+bed("assets/music/bed2.mp3", jul, blackStart + 0.3, gain("music/bed2", -31));
+bed("assets/music/bed2.mp3", slamAbs + 0.6, TOTAL, gain("music/bed2", -30));
 
 // ------------------------------------------------------------------ index
 const hosts = scenes.map((s) => `<div id="${s.id}" class="clip" data-composition-id="${s.id}" data-composition-src="compositions/${s.id}.html" data-start="${s.start}" data-duration="${s.dur}" data-track-index="1" data-track-kind="graphics" data-width="${W}" data-height="${H}"></div>`);
